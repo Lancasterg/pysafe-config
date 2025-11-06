@@ -2,13 +2,6 @@ import os
 from typing import TypeVar
 
 
-T = TypeVar("T")
-
-
-def env_any(var_name: str, return_type: T) -> T:
-    raise NotImplementedError("Not yet implemented")
-
-
 def _str_to_bool(value: str) -> bool:
     true_values: str[str] = {
         "true",
