@@ -9,18 +9,37 @@ def env_any(var_name: str, return_type: T) -> T:
     raise NotImplementedError("Not yet implemented")
 
 
-def _str2bool(value: str) -> bool:
-    _true_set = {"yes", "true", "t", "y", "1"}
-    _false_set = {"no", "false", "f", "n", "0"}
-
+def _str_to_bool(value: str) -> bool:
+    true_values: str[str] = {
+        "true",
+        "1",
+        "yes",
+        "y",
+        "on",
+        "enable",
+        "enabled",
+        "t",
+    }
+    false_values: set[str] = {
+        "false",
+        "0",
+        "no",
+        "n",
+        "off",
+        "disable",
+        "disabled",
+        "f"
+    }
+    
     if isinstance(value, str):
         value = value.lower()
-        if value in _true_set:
+        if value in true_values:
             return True
-        if value in _false_set:
+        if value in false_values:
             return False
 
-    raise ValueError('Expected "%s"' % '", "'.join(_true_set | _false_set))
+    raise ValueError(f"Expected {', '.join(true_values | false_values)}")
+
 
 
 def env_int(
@@ -149,14 +168,12 @@ def env_bool(var_name: str, default: bool | None = None, required: bool = True) 
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
 
     if value is not None:
-        if value.lower() in true_bool_values:
-            return True
-        elif value.lower() in false_bool_values:
-            return False
-        else:
+        try:
+            return _str_to_bool(value.lower())
+        except ValueError as e:
             raise TypeError(
-                f"Value of environment variable '{var_name}' cannot be converted to boolean {value}."
-            )
+                f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
+                )
     else:
         return default
 
