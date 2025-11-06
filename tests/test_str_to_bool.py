@@ -24,6 +24,31 @@ from pysafe_config._env import _str_to_bool
 )
 def test_str_to_bool(value: str, expected: bool):
     assert _str_to_bool(value) == expected
+    
+    
+@pytest.mark.parametrize(
+    "value, expected",
+    [
+        ("TRUE", True),
+        ("1", True),
+        ("YES", True),
+        ("Y", True),
+        ("ON", True),
+        ("ENABLE", True),
+        ("ENABLED", True),
+        ("T", True),
+        ("FALSE", False),
+        ("0", False),
+        ("NO", False),
+        ("N", False),
+        ("OFF", False),
+        ("DISABLE", False),
+        ("DISABLED", False),
+        ("F", False),
+    ],
+)
+def test_str_to_bool_upper(value: str, expected: bool):
+    assert _str_to_bool(value) == expected
 
 
 def test_str_to_bool_invalid_values_raise_error():
