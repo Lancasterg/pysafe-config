@@ -63,7 +63,9 @@ def env_int(var_name: str, default: int | None = None, required: bool = True) ->
     return value
 
 
-def env_str(var_name: str, default: str | None = None, required: bool = True) -> str | None:
+def env_str(
+    var_name: str, default: str | None = None, required: bool = True
+) -> str | None:
     """
     Retrieve the value of an environment variable as a string, with optional default
     and enforcement of required presence.
@@ -104,12 +106,9 @@ def env_str(var_name: str, default: str | None = None, required: bool = True) ->
             ) from e
 
     if required:
-        raise RuntimeError(
-            f"Missing required environment variable '{var_name}'."
-        )
+        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
 
     return default
-
 
 
 def env_bool(var_name: str, default: bool | None = None, required: bool = True) -> bool:
