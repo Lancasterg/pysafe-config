@@ -28,9 +28,9 @@ def _str_to_bool(value: str) -> bool:
         "off",
         "disable",
         "disabled",
-        "f"
+        "f",
     }
-    
+
     if isinstance(value, str):
         value = value.lower()
         if value in true_values:
@@ -39,7 +39,6 @@ def _str_to_bool(value: str) -> bool:
             return False
 
     raise ValueError(f"Expected {', '.join(true_values | false_values)}")
-
 
 
 def env_int(
@@ -139,7 +138,9 @@ def env_str(
         return default
 
 
-def env_bool(var_name: str, default: bool | None = None, required: bool = True) -> bool | None:
+def env_bool(
+    var_name: str, default: bool | None = None, required: bool = True
+) -> bool | None:
 
     true_bool_values = {
         "true",
@@ -151,16 +152,7 @@ def env_bool(var_name: str, default: bool | None = None, required: bool = True) 
         "enabled",
         "t",
     }
-    false_bool_values = {
-        "false",
-        "0",
-        "no",
-        "n",
-        "off",
-        "disable",
-        "disabled",
-        "f"
-    }
+    false_bool_values = {"false", "0", "no", "n", "off", "disable", "disabled", "f"}
 
     value = os.getenv(var_name)
 
@@ -173,7 +165,7 @@ def env_bool(var_name: str, default: bool | None = None, required: bool = True) 
         except ValueError as e:
             raise TypeError(
                 f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
-                )
+            )
     else:
         return default
 
