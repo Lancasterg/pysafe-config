@@ -38,8 +38,14 @@ def test_env_int_default_unset_required_true_raises_exception(monkeypatch):
         _ = env_int("NUM_BATCHES", required=True)
 
 
-def test_env_int_invalid_type_raises_exception(monkeypatch):
+def test_env_int_invalid_type_str_raises_exception(monkeypatch):
     monkeypatch.setenv("NUM_BATCHES", "hello")
+
+    with pytest.raises(TypeError):
+        _ = env_int("NUM_BATCHES")
+
+def test_env_int_invalid_type_float_raises_exception(monkeypatch):
+    monkeypatch.setenv("NUM_BATCHES", "1.0")
 
     with pytest.raises(TypeError):
         _ = env_int("NUM_BATCHES")
