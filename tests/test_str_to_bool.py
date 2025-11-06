@@ -52,7 +52,7 @@ def test_str_to_bool_upper(value: str, expected: bool):
     assert _str_to_bool(value) == expected
 
 
-def test_str_to_bool_invalid_values_raise_error():
+def test_str_to_bool_invalid_value_raise_error():
 
     with pytest.raises(ValueError):
         _str_to_bool("this is true, but not succinct enough")
