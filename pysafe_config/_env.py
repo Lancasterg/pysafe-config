@@ -1,6 +1,6 @@
 import os
-import sys
 from typing import TypeVar
+
 
 T = TypeVar("T")
 
@@ -57,18 +57,19 @@ def env_int(
     """
 
     value = os.getenv(var_name)
-    if value is not None:
+
+    if value is None and required:
+        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
+
+    elif value is not None:
         if value.isnumeric():
             return int(value)
         else:
             raise TypeError(
                 f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
             )
-
-    if required:
-        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
-
-    return default
+    else:
+        return default
 
 
 def env_str(
@@ -105,22 +106,59 @@ def env_str(
     """
 
     value = os.getenv(var_name)
-    if value is not None:
+
+    if value is None and required:
+        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
+    elif value is not None:
         try:
             return str(value)
         except TypeError as e:
             raise TypeError(
                 f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
             ) from e
+    else:
+        return default
 
-    if required:
+
+def env_bool(var_name: str, default: bool | None = None, required: bool = True) -> bool | None:
+
+    true_bool_values = {
+        "true",
+        "1",
+        "yes",
+        "y",
+        "on",
+        "enable",
+        "enabled",
+        "t",
+    }
+    false_bool_values = {
+        "false",
+        "0",
+        "no",
+        "n",
+        "off",
+        "disable",
+        "disabled",
+        "f"
+    }
+
+    value = os.getenv(var_name)
+
+    if value is None and required:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
 
-    return default
-
-
-def env_bool(var_name: str, default: bool | None = None, required: bool = True) -> bool:
-    raise NotImplementedError("Not yet implemented")
+    if value is not None:
+        if value.lower() in true_bool_values:
+            return True
+        elif value.lower() in false_bool_values:
+            return False
+        else:
+            raise TypeError(
+                f"Value of environment variable '{var_name}' cannot be converted to boolean {value}."
+            )
+    else:
+        return default
 
 
 def env_float(
