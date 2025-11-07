@@ -7,7 +7,7 @@ _int_pattern = re.compile(r"^[+-]?\d+$")
 def _str_to_int(value: str) -> int:
     """
     Converts a string value to an integer by checking value against a regex.
-    
+
     Args:
         value (str): The string value to convert.
 

@@ -37,14 +37,14 @@ def getenv_str(
     value: str | None = os.getenv(var_name)
 
     if value is None and required:
-        raise RuntimeError(f"Missing required environment variable \'{var_name}\'.")
+        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
     elif value is not None:
         try:
             # os.getenv returns a str so this cast to str is not strictly needed
             return str(value)
         except TypeError as e:
             raise ValueError(
-                f"Value of environment variable \'{var_name}\' cannot be converted to integer \'{value}\'."
+                f"Value of environment variable '{var_name}' cannot be converted to integer '{value}'."
             ) from e
     else:
         return default

@@ -28,7 +28,7 @@ def _str_to_bool(value: str) -> bool:
     """
     Converts a string value to a boolean.
 
-    Checks if the input string (case-insensitive) is present in a set of 
+    Checks if the input string (case-insensitive) is present in a set of
     true or false values. If it matches a true value, it returns
     True. If it matches a false value, it returns False.
 

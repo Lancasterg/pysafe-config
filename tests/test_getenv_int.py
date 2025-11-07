@@ -75,5 +75,3 @@ def test_getenv_float_strict_unset_raises_exception(monkeypatch):
 
     with pytest.raises(RuntimeError):
         _ = getenv_int_strict("NUM_BATCHES")
-
-

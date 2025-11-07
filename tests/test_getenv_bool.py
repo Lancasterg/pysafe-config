@@ -81,5 +81,3 @@ def test_getenv_bool_strict_unset_raises_exception(monkeypatch):
 
     with pytest.raises(RuntimeError):
         _ = getenv_bool_strict("ENABLE_DB")
-
-

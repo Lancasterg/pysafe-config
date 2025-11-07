@@ -51,7 +51,7 @@ def test_getenv_float_invalid_type_float_raises_exception(monkeypatch):
 
     with pytest.raises(ValueError):
         _ = getenv_float("SAMPLING_RATIO")
-        
+
 
 def test_getenv_float_strict_set(monkeypatch):
     expected = 100.0
@@ -75,5 +75,3 @@ def test_getenv_float_strict_unset_raises_exception(monkeypatch):
 
     with pytest.raises(RuntimeError):
         _ = getenv_float_strict("SAMPLING_RATIO")
-
-

@@ -7,7 +7,7 @@ _float_pattern = re.compile(r"^[+-]?\d+\.\d+$")
 def _str_to_float(value: str) -> float:
     """
     Converts a string value to a float by checking value against a regex.
-    
+
     Args:
         value (str): The string value to convert.
 

@@ -52,5 +52,3 @@ def test_getenv_str_strict_set(monkeypatch):
 def test_getenv_str_strict_unset_raises_exception():
     with pytest.raises(RuntimeError):
         _ = getenv_str_strict("MY_API_KEY")
-
-
