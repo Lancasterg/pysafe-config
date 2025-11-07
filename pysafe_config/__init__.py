@@ -10,6 +10,25 @@ __all__ = [
 ]
 
 
+def getenv_bool_strict_2(var_name: str) -> bool:
+    """
+    Get the value of an environment variable, guaranteeing the return type as a boolean.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        bool: The boolean value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
+    from ._getenv import _getenv_strict as _getenv_bool_func
+
+    return _getenv_bool_func(var_name, bool)
+
+
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
