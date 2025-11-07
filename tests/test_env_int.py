@@ -51,4 +51,3 @@ def test_env_int_invalid_type_float_raises_exception(monkeypatch):
 
     with pytest.raises(ValueError):
         _ = getenv_int("NUM_BATCHES")
-
