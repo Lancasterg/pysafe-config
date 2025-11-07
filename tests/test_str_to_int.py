@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config._env import _str_to_int
+from pysafe_config._getenv_int import _str_to_int
 
 
 @pytest.mark.parametrize(
