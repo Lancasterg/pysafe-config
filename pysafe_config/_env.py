@@ -46,7 +46,7 @@ def _str_to_bool(value: str) -> bool:
 
 
 def _str_to_int(value: str) -> int:
-    if _int_pattern.match(value.strip()) and value.isnumeric():
+    if _int_pattern.match(value.strip()):
         return int(value)
     else:
         raise ValueError(f"Value must be valid integer '{value}'")
