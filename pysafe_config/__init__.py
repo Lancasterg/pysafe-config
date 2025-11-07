@@ -43,24 +43,76 @@ def getenv_int(
 
 
 def getenv_bool_strict(var_name: str) -> bool:
+    """
+    Get the value of an environment variable, guaranteeing the return type as a boolean.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        bool: The boolean value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     from ._getenv_bool import getenv_bool_strict as _getenv_bool_func
 
     return _getenv_bool_func(var_name)
 
 
 def getenv_float_strict(var_name: str) -> float:
+    """
+    Get the value of an environment variable, guaranteeing the return type as a float.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        float: The float value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     from ._getenv_float import getenv_float_strict as _getenv_float_func
 
     return _getenv_float_func(var_name)
 
 
 def getenv_str_strict(var_name: str) -> str:
+    """
+    Get the value of an environment variable, guaranteeing the return type as a string.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        str: The string value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     from ._getenv_str import getenv_str_strict as _getenv_str_func
 
     return _getenv_str_func(var_name)
 
 
 def getenv_int_strict(var_name: str) -> int:
+    """
+    Get the value of an environment variable, guaranteeing the return type as an integer.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        integer: The integer value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     from ._getenv_int import getenv_int_strict as _getenv_int_func
 
     return _getenv_int_func(var_name)
