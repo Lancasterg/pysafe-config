@@ -13,8 +13,8 @@ def _str_to_float(value: str) -> float:
 
 def getenv_float(
     var_name: str, default: float | None = None, required: bool = True
-) -> float:
-    value: str = os.getenv(var_name)
+) -> float | None:
+    value: str | None = os.getenv(var_name)
 
     if value is None and required is True:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")

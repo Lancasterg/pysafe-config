@@ -34,7 +34,7 @@ def getenv_str(
         RuntimeError: If the environment variable is required but not set.
     """
 
-    value: str = os.getenv(var_name)
+    value: str | None = os.getenv(var_name)
 
     if value is None and required:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
