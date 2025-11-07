@@ -1,7 +1,6 @@
 import os
 import re
 
-
 _float_pattern = re.compile(r"^[+-]?\d+\.\d+$")
 _int_pattern = re.compile(r"^[+-]?\d+$")
 

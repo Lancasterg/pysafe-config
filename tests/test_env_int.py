@@ -1,4 +1,5 @@
 import pytest
+
 from pysafe_config import getenv_int
 
 
