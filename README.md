@@ -4,7 +4,9 @@ The project is a fully typed package for retrieving environment variables in pyt
 This is something I do in every project I work on and it should reduce boilerplate. No more 
 
 ### todo before publishing on pypi
+- rename to getenv_str, getenv_int, etc to better suit os lib
 - Implement & test of env_float
+- implement & test getenv_enum
 - Write clear docstrings and comments as required
 - Write good readme
 - git cicd pipeline
