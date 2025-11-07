@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config._get_env._getenv_bool import _str_to_bool
+from pysafe_config._getenv_bool import _str_to_bool
 
 
 @pytest.mark.parametrize(
