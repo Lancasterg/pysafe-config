@@ -1,6 +1,5 @@
 import pytest
 from pysafe_config import getenv_float
-from pysafe_config._env import _str_to_float
 
 
 def test_env_float_default_unset_required_true(monkeypatch):

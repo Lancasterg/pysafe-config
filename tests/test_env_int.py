@@ -1,6 +1,5 @@
 import pytest
 from pysafe_config import getenv_int
-from pysafe_config._env import _str_to_int
 
 
 def test_env_int_default_unset_required_true(monkeypatch):

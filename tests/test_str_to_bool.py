@@ -1,4 +1,5 @@
 import pytest
+
 from pysafe_config._env import _str_to_bool
 
 
