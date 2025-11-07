@@ -37,20 +37,41 @@ def getenv_str(
     value: str | None = os.getenv(var_name)
 
     if value is None and required:
-        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
+        raise RuntimeError(f"Missing required environment variable \'{var_name}\'.")
     elif value is not None:
         try:
             # os.getenv returns a str so this cast to str is not strictly needed
             return str(value)
         except TypeError as e:
             raise ValueError(
-                f"Value of environment variable '{var_name}' cannot be converted to integer '{value}'."
+                f"Value of environment variable \'{var_name}\' cannot be converted to integer \'{value}\'."
             ) from e
     else:
         return default
 
 
 def getenv_str_strict(var_name: str) -> str:
+    """
+    Retrieve the value of an environment variable as a string, but garuantees the
+    return type as a string.
+
+    This function looks up the environment variable specified by var_name. If the
+    variable is set, its value is returned as a string. If it cannot be converted
+    to a string, a TypeError is raised.
+
+    If the environment variable is not set, a RuntimeError is raised indicating
+    that the variable is mandatory.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        str: The string value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     value: str | None = os.getenv(var_name)
     if value is None:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
