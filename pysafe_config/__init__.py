@@ -1,5 +1,3 @@
-# from typing import TypeVar
-
 __all__ = [
     "getenv_bool",
     "getenv_float",
