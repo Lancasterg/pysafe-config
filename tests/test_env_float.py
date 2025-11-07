@@ -11,6 +11,7 @@ def test_env_float_default_unset_required_true(monkeypatch):
 
     assert result == expected
 
+
 def test_env_float_default_none_required_false(monkeypatch):
     expected = None
 
