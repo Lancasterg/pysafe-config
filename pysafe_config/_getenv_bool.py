@@ -25,6 +25,23 @@ _false_values: set[str] = {
 
 
 def _str_to_bool(value: str) -> bool:
+    """
+    Converts a string value to a boolean.
+
+    Checks if the input string (case-insensitive) is present in a set of 
+    true or false values. If it matches a true value, it returns
+    True. If it matches a false value, it returns False.
+
+    Args:
+        value (str): The string value to convert.
+
+    Returns:
+        bool: The boolean representation of the string.
+
+    Raises:
+        ValueError: If the string cannot be converted to a boolean (i.e., it's not
+                    in the true or false value sets).
+    """
     value = value.lower()
     if value in _true_values:
         return True
@@ -37,6 +54,35 @@ def _str_to_bool(value: str) -> bool:
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
+    """
+    Retrieve the value of an environment variable as a boolean, with optional default
+    and enforcement of required presence.
+
+    This function looks up the environment variable specified by var_name. If the
+    variable is set, its value is converted to a boolean using `_str_to_bool`.
+    If it cannot be converted to a boolean, a ValueError is raised.
+
+    If the environment variable is not set:
+      - If required is True, a RuntimeError is raised indicating that the variable
+        is mandatory.
+      - If required is False, the function returns the default value, which may be
+        None if no default is provided.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+        default (bool | None, optional): The value to return if the environment variable
+            is not set and required is False. Defaults to None.
+        required (bool, optional): Whether the environment variable is mandatory. If True
+            and the variable is not set, a RuntimeError is raised. Defaults to True.
+
+    Returns:
+        bool | None: The boolean value of the environment variable, or the default if
+        the variable is missing and not required.
+
+    Raises:
+        ValueError: If the environment variable is set but cannot be converted to a boolean.
+        RuntimeError: If the environment variable is required but not set.
+    """
 
     value = os.getenv(var_name)
 

@@ -5,6 +5,18 @@ _int_pattern = re.compile(r"^[+-]?\d+$")
 
 
 def _str_to_int(value: str) -> int:
+    """
+    Converts a string value to an integer by checking value against a regex.
+    
+    Args:
+        value (str): The string value to convert.
+
+    Returns:
+        int: The integer representation of the string.
+
+    Raises:
+        ValueError: If the string cannot be converted to an integer
+    """
     if _int_pattern.match(value.strip()):
         return int(value)
     else:
