@@ -1,6 +1,5 @@
 import os
 
-#
 _true_values: set[str] = {
     "true",
     "1",
@@ -55,17 +54,12 @@ def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
     """
-    Retrieve the value of an environment variable as a boolean, with optional default
-    and enforcement of required presence.
-
-    This function looks up the environment variable specified by var_name. If the
-    variable is set, its value is converted to a boolean using `_str_to_bool`.
-    If it cannot be converted to a boolean, a ValueError is raised.
+    Get the value of an environment variable specified by `var_name`, returned as a boolean.
 
     If the environment variable is not set:
-      - If required is True, a RuntimeError is raised indicating that the variable
+      - If `required` is True, a RuntimeError is raised indicating that the variable
         is mandatory.
-      - If required is False, the function returns the default value, which may be
+      - If `required` is False, the function returns the default value, which may be
         None if no default is provided.
 
     Args:
@@ -76,11 +70,11 @@ def getenv_bool(
             and the variable is not set, a RuntimeError is raised. Defaults to True.
 
     Returns:
-        bool | None: The boolean value of the environment variable, or the default if
+        bool | None: The string value of the environment variable, or the default if
         the variable is missing and not required.
 
     Raises:
-        ValueError: If the environment variable is set but cannot be converted to a boolean.
+        TypeError: If the environment variable is set but cannot be converted to a string.
         RuntimeError: If the environment variable is required but not set.
     """
 
@@ -102,14 +96,16 @@ def getenv_bool(
 
 def getenv_bool_strict(var_name: str) -> bool:
     """
-    Retrieve the value of an environment variable as a boolean, and guarantees the
-    return type as a boolean.
+    Get the value of an environment variable specified by `var_name`, returned as a boolean.
+
+    Enforces the return type of bool, the variable is always required otherwise an
+    exception is raised
 
     Args:
         var_name (str): The name of the environment variable to retrieve.
 
     Returns:
-        bool: The boolean value of the environment variable.
+        bool: The integer value of the environment variable.
 
     Raises:
         TypeError: If the environment variable is set but cannot be converted to a string.

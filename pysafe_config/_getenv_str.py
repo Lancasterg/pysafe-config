@@ -5,17 +5,12 @@ def getenv_str(
     var_name: str, default: str | None = None, required: bool = True
 ) -> str | None:
     """
-    Retrieve the value of an environment variable as a string, with optional default
-    and enforcement of required presence.
-
-    This function looks up the environment variable specified by var_name. If the
-    variable is set, its value is converted to a string and returned. If it cannot
-    be converted to a string, a TypeError is raised.
+    Get the value of an environment variable specified by `var_name`, returned as a string.
 
     If the environment variable is not set:
-      - If required is True, a RuntimeError is raised indicating that the variable
+      - If `required` is True, a RuntimeError is raised indicating that the variable
         is mandatory.
-      - If required` is False, the function returns the default value, which may be
+      - If required is False, the function returns the default value, which may be
         None if no default is provided.
 
     Args:
@@ -52,8 +47,10 @@ def getenv_str(
 
 def getenv_str_strict(var_name: str) -> str:
     """
-    Retrieve the value of an environment variable as a string, and guarantees the
-    return type as a string.
+    Get the value of an environment variable specified by `var_name`, returned as a string.
+
+    Enforces the return type of string, the variable is always required otherwise an
+    exception is raised
 
     Args:
         var_name (str): The name of the environment variable to retrieve.

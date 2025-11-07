@@ -27,17 +27,12 @@ def getenv_int(
     var_name: str, default: int | None = None, required: bool = True
 ) -> int | None:
     """
-    Retrieve the value of an environment variable as an integer, with optional default
-    and enforcement of required presence.
-
-    This function looks up the environment variable specified by var_name. If the
-    variable is set, its value is converted to a string and returned. If it cannot
-    be converted to a string, a TypeError is raised.
+    Get the value of an environment variable specified by `var_name`, returned as an integer.
 
     If the environment variable is not set:
-      - If required is True, a RuntimeError is raised indicating that the variable
+      - If `required` is True, a RuntimeError is raised indicating that the variable
         is mandatory.
-      - If required` is False, the function returns the default value, which may be
+      - If `required` is False, the function returns the default value, which may be
         None if no default is provided.
 
     Args:
@@ -56,7 +51,7 @@ def getenv_int(
         RuntimeError: If the environment variable is required but not set.
     """
 
-    value = os.getenv(var_name)
+    value: str | None = os.getenv(var_name)
 
     if value is None and required:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
@@ -74,14 +69,16 @@ def getenv_int(
 
 def getenv_int_strict(var_name: str) -> int:
     """
-    Retrieve the value of an environment variable as a float, and guarantees the
-    return type as an float.
+    Get the value of an environment variable specified by `var_name`, returned as an integer.
+
+    Enforces the return type of integer, the variable is always required otherwise an
+    exception is raised
 
     Args:
         var_name (str): The name of the environment variable to retrieve.
 
     Returns:
-        float: The integer value of the environment variable.
+        int: The integer value of the environment variable.
 
     Raises:
         TypeError: If the environment variable is set but cannot be converted to a string.

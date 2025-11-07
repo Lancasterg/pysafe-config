@@ -37,6 +37,7 @@ def getenv_str(
 def getenv_int(
     var_name: str, default: int | None = None, required: bool = True
 ) -> int | None:
+
     from pysafe_config._getenv_int import getenv_int as _getenv_int_func
 
     return _getenv_int_func(var_name, default=default, required=required)
