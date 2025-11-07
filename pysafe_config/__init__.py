@@ -48,19 +48,19 @@ def getenv_bool_strict(var_name: str) -> bool:
     return _getenv_bool_func(var_name)
 
 
-def getenv_float_strict(var_name: str) -> float | None:
+def getenv_float_strict(var_name: str) -> float:
     from ._getenv_float import getenv_float_strict as _getenv_float_func
 
     return _getenv_float_func(var_name)
 
 
-def getenv_str_strict(var_name: str) -> str | None:
+def getenv_str_strict(var_name: str) -> str:
     from ._getenv_str import getenv_str_strict as _getenv_str_func
 
     return _getenv_str_func(var_name)
 
 
-def getenv_int_strict(var_name: str) -> int | None:
+def getenv_int_strict(var_name: str) -> int:
     from ._getenv_int import getenv_int_strict as _getenv_int_func
 
     return _getenv_int_func(var_name)
