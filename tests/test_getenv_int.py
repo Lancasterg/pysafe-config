@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config import getenv_int
+from pysafe_config import getenv_int, getenv_int_strict
 
 
 def test_getenv_int_default_unset_required_true(monkeypatch):
@@ -51,3 +51,29 @@ def test_getenv_int_invalid_type_float_raises_exception(monkeypatch):
 
     with pytest.raises(ValueError):
         _ = getenv_int("NUM_BATCHES")
+
+
+def test_getenv_int_strict_set(monkeypatch):
+    expected = 100
+
+    monkeypatch.setenv("NUM_BATCHES", "100")
+
+    result = getenv_int_strict("NUM_BATCHES")
+
+    assert result == expected
+
+
+def test_getenv_int_strict_invalid_var_raises_exception(monkeypatch):
+
+    monkeypatch.setenv("NUM_BATCHES", "15.3")
+
+    with pytest.raises(ValueError):
+        _ = getenv_int_strict("NUM_BATCHES")
+
+
+def test_getenv_float_strict_unset_raises_exception(monkeypatch):
+
+    with pytest.raises(RuntimeError):
+        _ = getenv_int_strict("NUM_BATCHES")
+
+

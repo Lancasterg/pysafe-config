@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config import getenv_bool
+from pysafe_config import getenv_bool, getenv_bool_strict
 
 
 def test_getenv_bool_default_true_unset_required_true(monkeypatch):
@@ -36,7 +36,7 @@ def test_getenv_bool_default_set_required_false(monkeypatch):
 
     result = getenv_bool("ENABLE_DB", default=False, required=False)
 
-    assert result == expected
+    assert result is expected
 
 
 def test_getenv_bool_default_set_required_true_raises_exception(monkeypatch):
@@ -47,3 +47,39 @@ def test_getenv_bool_default_set_required_true_raises_exception(monkeypatch):
 def test_getenv_bool_default_unset_required_true_raises_exception(monkeypatch):
     with pytest.raises(RuntimeError):
         _ = getenv_bool("ENABLE_DB", required=True)
+
+
+def test_getenv_bool_strict_true(monkeypatch):
+    expected = True
+
+    monkeypatch.setenv("ENABLE_DB", "t")
+
+    result = getenv_bool_strict("ENABLE_DB")
+
+    assert result is expected
+
+
+def test_getenv_bool_strict_false(monkeypatch):
+    expected = False
+
+    monkeypatch.setenv("ENABLE_DB", "f")
+
+    result = getenv_bool_strict("ENABLE_DB")
+
+    assert result is expected
+
+
+def test_getenv_bool_strict_invalid_var_raises_exception(monkeypatch):
+
+    monkeypatch.setenv("ENABLE_DB", "not true")
+
+    with pytest.raises(ValueError):
+        _ = getenv_bool_strict("ENABLE_DB")
+
+
+def test_getenv_bool_strict_unset_raises_exception(monkeypatch):
+
+    with pytest.raises(RuntimeError):
+        _ = getenv_bool_strict("ENABLE_DB")
+
+
