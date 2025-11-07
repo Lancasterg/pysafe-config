@@ -31,7 +31,7 @@ def _str_to_float(value: str) -> float:
     if _float_pattern.match(value.strip()):
         return float(value)
     else:
-        raise ValueError(f"Value must be in format 'x.y' {value}")
+        raise ValueError(f"Value must be in format 'x.y' '{value}'")
 
 
 def _str_to_bool(value: str) -> bool:
@@ -94,7 +94,7 @@ def getenv_int(
             return _str_to_int(value)
         except ValueError as e:
             raise ValueError(
-                f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
+                f"Value of environment variable '{var_name}' cannot be converted to integer '{value}'."
             ) from e
     else:
         return default
@@ -143,7 +143,7 @@ def getenv_str(
             return str(value)
         except TypeError as e:
             raise ValueError(
-                f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
+                f"Value of environment variable '{var_name}' cannot be converted to integer '{value}'."
             ) from e
     else:
         return default
@@ -182,7 +182,7 @@ def getenv_float(
             return _str_to_float(value)
         except ValueError as e:
             raise ValueError(
-                f"Value of environment variable '{var_name}' cannot be converted to float {value}."
+                f"Value of environment variable '{var_name}' cannot be converted to float '{value}'."
             ) from e
     else:
         return default
