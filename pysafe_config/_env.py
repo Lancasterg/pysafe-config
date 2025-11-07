@@ -52,7 +52,7 @@ def _str_to_int(value: str) -> int:
         raise ValueError(f"Value must be valid integer '{value}'")
 
 
-def env_int(
+def getenv_int(
     var_name: str, default: int | None = None, required: bool = True
 ) -> int | None:
     """
@@ -101,7 +101,7 @@ def env_int(
         return default
 
 
-def env_str(
+def getenv_str(
     var_name: str, default: str | None = None, required: bool = True
 ) -> str | None:
     """
@@ -150,7 +150,7 @@ def env_str(
         return default
 
 
-def env_bool(
+def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
 
@@ -170,7 +170,7 @@ def env_bool(
         return default
 
 
-def env_float(
+def getenv_float(
     var_name: str, default: float | None = None, required: bool = True
 ) -> float:
     value: str = os.getenv(var_name)

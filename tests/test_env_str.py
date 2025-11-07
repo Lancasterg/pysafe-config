@@ -1,5 +1,5 @@
 import pytest
-from pysafe_config import env_str
+from pysafe_config import getenv_str
 
 
 def test_env_str_default_unset_required_true(monkeypatch):
@@ -7,7 +7,7 @@ def test_env_str_default_unset_required_true(monkeypatch):
 
     monkeypatch.setenv("MY_API_KEY", "super_secret_string")
 
-    result = env_str("MY_API_KEY")
+    result = getenv_str("MY_API_KEY")
 
     assert result == expected
 
@@ -15,7 +15,7 @@ def test_env_str_default_unset_required_true(monkeypatch):
 def test_env_str_default_none_required_false(monkeypatch):
     expected = None
 
-    result = env_str("MY_API_KEY", required=False)
+    result = getenv_str("MY_API_KEY", required=False)
 
     assert result is expected
 
@@ -23,16 +23,16 @@ def test_env_str_default_none_required_false(monkeypatch):
 def test_env_str_default_set_required_false(monkeypatch):
     expected = "super_secret_string"
 
-    result = env_str("MY_API_KEY", default="super_secret_string", required=False)
+    result = getenv_str("MY_API_KEY", default="super_secret_string", required=False)
 
     assert result == expected
 
 
 def test_env_str_default_set_required_true_raises_exception(monkeypatch):
     with pytest.raises(RuntimeError):
-        _ = env_str("MY_API_KEY", default="super_secret_string", required=True)
+        _ = getenv_str("MY_API_KEY", default="super_secret_string", required=True)
 
 
 def test_env_str_default_unset_required_true_raises_exception(monkeypatch):
     with pytest.raises(RuntimeError):
-        _ = env_str("MY_API_KEY", required=True)
+        _ = getenv_str("MY_API_KEY", required=True)
