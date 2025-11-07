@@ -55,6 +55,20 @@ def getenv_bool(
 
 
 def getenv_bool_strict(var_name: str) -> bool:
+    """
+    Retrieve the value of an environment variable as a boolean, and guarantees the
+    return type as a boolean.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        bool: The boolean value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     value: str | None = os.getenv(var_name)
     if value is None:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")

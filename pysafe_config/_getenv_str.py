@@ -52,15 +52,8 @@ def getenv_str(
 
 def getenv_str_strict(var_name: str) -> str:
     """
-    Retrieve the value of an environment variable as a string, but garuantees the
+    Retrieve the value of an environment variable as a string, and guarantees the
     return type as a string.
-
-    This function looks up the environment variable specified by var_name. If the
-    variable is set, its value is returned as a string. If it cannot be converted
-    to a string, a TypeError is raised.
-
-    If the environment variable is not set, a RuntimeError is raised indicating
-    that the variable is mandatory.
 
     Args:
         var_name (str): The name of the environment variable to retrieve.

@@ -31,6 +31,20 @@ def getenv_float(
 
 
 def getenv_float_strict(var_name: str) -> float:
+    """
+    Retrieve the value of an environment variable as a float, and guarantees the
+    return type as a float.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+
+    Returns:
+        float: The float value of the environment variable.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is not set.
+    """
     value: str | None = os.getenv(var_name)
     if value is None:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
