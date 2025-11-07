@@ -2,36 +2,54 @@ import os
 import re
 
 
+_float_pattern = re.compile(r"^[+-]?\d+\.\d+$")
+_int_pattern = re.compile(r"^[+-]?\d+$")
+
+_true_values: set[str] = {
+    "true",
+    "1",
+    "yes",
+    "y",
+    "on",
+    "enable",
+    "enabled",
+    "t",
+}
+
+_false_values: set[str] = {
+    "false",
+    "0",
+    "no",
+    "n",
+    "off",
+    "disable",
+    "disabled",
+    "f",
+}
+
+
+def _str_to_float(value: str) -> float:
+    if _float_pattern.match(value.strip()):
+        return float(value)
+    else:
+        raise ValueError(f"Value must be in format 'x.y' {value}")
+
+
 def _str_to_bool(value: str) -> bool:
-    true_values: set[str] = {
-        "true",
-        "1",
-        "yes",
-        "y",
-        "on",
-        "enable",
-        "enabled",
-        "t",
-    }
-    false_values: set[str] = {
-        "false",
-        "0",
-        "no",
-        "n",
-        "off",
-        "disable",
-        "disabled",
-        "f",
-    }
+    value = value.lower()
+    if value in _true_values:
+        return True
+    if value in _false_values:
+        return False
 
-    if isinstance(value, str):
-        value = value.lower()
-        if value in true_values:
-            return True
-        if value in false_values:
-            return False
+    raise ValueError(f"Expected {', '.join(_true_values | _false_values)}")
 
-    raise ValueError(f"Expected {', '.join(true_values | false_values)}")
+
+def _str_to_int(value: str) -> int:
+    if _int_pattern.match(value.strip()) and value.isnumeric():
+        return int(value)
+    else:
+        raise ValueError(f"Value must be valid integer '{value}'")
 
 
 def env_int(
@@ -73,13 +91,12 @@ def env_int(
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
 
     elif value is not None:
-        # TODO: Might need to do some better logic here for edge cases
-        if value.isnumeric():
-            return int(value)
-        else:
+        try:
+            return _str_to_int(value)
+        except ValueError as e:
             raise ValueError(
                 f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
-            )
+            ) from e
     else:
         return default
 
@@ -151,31 +168,6 @@ def env_bool(
             ) from e
     else:
         return default
-
-
-_float_pattern = re.compile(r"^[+-]?(?:\d+\.\d+|\d+\.|\.\d+)$")
-_int_pattern = re.compile(r"^[+-]?\d+$")
-
-
-def is_simple_float(value: str) -> bool:
-    if _float_pattern.match(value.strip()):
-        return True
-    else:
-        return False
-
-
-def _is_simple_int(value: str) -> bool:
-    if _int_pattern.match(value.strip()):
-        return True
-    else:
-        return False
-
-
-def _str_to_float(value: str) -> float:
-    if is_simple_float(value) is True:
-        return float(value)
-    else:
-        raise ValueError(f"Value must be in format 'x.y' {value}")
 
 
 def env_float(
