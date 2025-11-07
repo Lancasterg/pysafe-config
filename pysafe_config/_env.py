@@ -1,9 +1,9 @@
 import os
-from typing import TypeVar
+import re
 
 
 def _str_to_bool(value: str) -> bool:
-    true_values: str[str] = {
+    true_values: set[str] = {
         "true",
         "1",
         "yes",
@@ -73,10 +73,11 @@ def env_int(
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
 
     elif value is not None:
+        # TODO: Might need to do some better logic here for edge cases
         if value.isnumeric():
             return int(value)
         else:
-            raise TypeError(
+            raise ValueError(
                 f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
             )
     else:
@@ -116,15 +117,16 @@ def env_str(
         RuntimeError: If the environment variable is required but not set.
     """
 
-    value = os.getenv(var_name)
+    value: str = os.getenv(var_name)
 
     if value is None and required:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
     elif value is not None:
         try:
+            # os.getenv returns a str so this cast to str is not strictly needed
             return str(value)
         except TypeError as e:
-            raise TypeError(
+            raise ValueError(
                 f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
             ) from e
     else:
@@ -135,18 +137,6 @@ def env_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
 
-    true_bool_values = {
-        "true",
-        "1",
-        "yes",
-        "y",
-        "on",
-        "enable",
-        "enabled",
-        "t",
-    }
-    false_bool_values = {"false", "0", "no", "n", "off", "disable", "disabled", "f"}
-
     value = os.getenv(var_name)
 
     if value is None and required:
@@ -156,14 +146,52 @@ def env_bool(
         try:
             return _str_to_bool(value.lower())
         except ValueError as e:
-            raise TypeError(
-                f"Value of environment variable '{var_name}' cannot be converted to integer {value}."
-            )
+            raise ValueError(
+                f"Value of environment variable '{var_name}' cannot be converted to integer '{value}'\nValue must be in format 'x.y'"
+            ) from e
     else:
         return default
+
+
+_float_pattern = re.compile(r"^[+-]?(?:\d+\.\d+|\d+\.|\.\d+)$")
+_int_pattern = re.compile(r"^[+-]?\d+$")
+
+
+def is_simple_float(value: str) -> bool:
+    if _float_pattern.match(value.strip()):
+        return True
+    else:
+        return False
+
+
+def _is_simple_int(value: str) -> bool:
+    if _int_pattern.match(value.strip()):
+        return True
+    else:
+        return False
+
+
+def _str_to_float(value: str) -> float:
+    if is_simple_float(value) is True:
+        return float(value)
+    else:
+        raise ValueError(f"Value must be in format 'x.y' {value}")
 
 
 def env_float(
     var_name: str, default: float | None = None, required: bool = True
 ) -> float:
-    raise NotImplementedError("Not yet implemented")
+    value: str = os.getenv(var_name)
+
+    if value is None and required is True:
+        raise RuntimeError(f"Missing required environment variable '{var_name}'.")
+
+    elif value is not None:
+        try:
+            return _str_to_float(value)
+        except ValueError as e:
+            raise ValueError(
+                f"Value of environment variable '{var_name}' cannot be converted to float {value}."
+            ) from e
+    else:
+        return default
