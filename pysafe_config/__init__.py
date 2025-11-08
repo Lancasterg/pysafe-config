@@ -233,22 +233,29 @@ def getenv_int_strict(var_name: str) -> int:
     """
     Get the value of an environment variable, guaranteeing the return type as an integer.
 
-    Valid integer strings must not:
-        - Have any whitespace
-        - Contain any non-numeric characters other than a
-          plus or minus sign at the beginning of the number
+    Valid integer strings must:
+      - Contain only digits (`0-9`), optionally preceded by a single `+` or `-` sign
+      - Not contain any whitespace
+      - Not include decimal points, letters, or special symbols
 
-    Some valid examples of integer strings are
-        - "100"
-        - "1"
-        - "-50"
-        - "+1000"
+    Examples:
+
+        | Valid strings | Invalid strings |
+        |----------------|-----------------|
+        | "100"          | " 100"          |
+        | "1"            | "10.5"          |
+        | "-50"          | "1,000"         |
+        | "+1000"        | "12a"           |
+        | "0"            | "++5"           |
+        | "-0"           | "5-"            |
+        | "123456         | "ten"           |
+        | "-123456"       | "" (empty)      |
 
     Args:
         var_name (str): The name of the environment variable to retrieve.
 
     Returns:
-        integer: The integer value of the environment variable.
+        int: The integer value of the environment variable.
 
     Raises:
         TypeError: If the environment variable is set but cannot be converted to an integer.
@@ -257,3 +264,4 @@ def getenv_int_strict(var_name: str) -> int:
     from ._helper_int import _str_to_int
 
     return _getenv_strict(var_name, int, _str_to_int)
+
