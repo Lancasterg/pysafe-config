@@ -1,30 +1,22 @@
 import os
 from typing import TypeVar, Callable, Any, Mapping
 
+from pysafe_config._getenv_bool import _str_to_bool
+from pysafe_config._getenv_float import _str_to_float
+from pysafe_config._getenv_int import _str_to_int
+
 T = TypeVar("T", bool, int, float, str)
 
 
-def str2bool(val: str) -> bool:
-    return val.lower() in {"true", "1", "yes", "on"}
-
-
-def str2float(val: str) -> float:
-    return float(val)
-
-
-def str2int(val: str) -> int:
-    return int(val)
-
-
-def str2str(val: str) -> str:
-    return val
+def str_to_str(val) -> str:
+    return str(val)
 
 
 _CONVERTERS: Mapping[type[bool | int | float | str], Callable[[str], Any]] = {
-    bool: str2bool,
-    int: str2int,
-    float: str2float,
-    str: str2str,
+    bool: _str_to_bool,
+    int: _str_to_int,
+    float: _str_to_float,
+    str: str_to_str,
 }
 
 

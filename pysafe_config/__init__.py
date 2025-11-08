@@ -7,26 +7,14 @@ __all__ = [
     "getenv_float_strict",
     "getenv_int_strict",
     "getenv_str_strict",
+    "getenv_int_strict_2"
 ]
 
 
-def getenv_bool_strict_2(var_name: str) -> bool:
-    """
-    Get the value of an environment variable, guaranteeing the return type as a boolean.
+def getenv_int_strict_2(var_name: str) -> int:
+    from ._getenv import _getenv_strict as _getenv_int_func
 
-    Args:
-        var_name (str): The name of the environment variable to retrieve.
-
-    Returns:
-        bool: The boolean value of the environment variable.
-
-    Raises:
-        TypeError: If the environment variable is set but cannot be converted to a string.
-        RuntimeError: If the environment variable is not set.
-    """
-    from ._getenv import _getenv_strict as _getenv_bool_func
-
-    return _getenv_bool_func(var_name, bool)
+    return _getenv_int_func(var_name, int)
 
 
 def getenv_bool(
