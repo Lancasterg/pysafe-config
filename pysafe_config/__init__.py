@@ -17,42 +17,42 @@ def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
     """
-   Get the value of a bool environment variable `var_name`
+    Get the value of a bool environment variable `var_name`
 
-   If the environment variable is not set:
-       - If `required` is True, a RuntimeError is raised indicating that the variable
-         is mandatory.
-       - If `required` is False, the function returns the default value, which may be
-         None if no default is provided.
+    If the environment variable is not set:
+        - If `required` is True, a RuntimeError is raised indicating that the variable
+          is mandatory.
+        - If `required` is False, the function returns the default value, which may be
+          None if no default is provided.
 
-    Valid boolean strings are case-insensitive.
-    Acceptable values are:
+     Valid boolean strings are case-insensitive.
+     Acceptable values are:
 
-        | True values | False values |
-        |--------------|--------------|
-        | "true"       | "false"      |
-        | "1"          | "0"          |
-        | "yes"        | "no"         |
-        | "y"          | "n"          |
-        | "on"         | "off"        |
-        | "enable"     | "disable"    |
-        | "enabled"    | "disabled"   |
-        | "t"          | "f"          |
+         | True values | False values |
+         |--------------|--------------|
+         | "true"       | "false"      |
+         | "1"          | "0"          |
+         | "yes"        | "no"         |
+         | "y"          | "n"          |
+         | "on"         | "off"        |
+         | "enable"     | "disable"    |
+         | "enabled"    | "disabled"   |
+         | "t"          | "f"          |
 
-    Args:
-        var_name (str): The name of the environment variable to retrieve.
-        default (bool | None, optional): The value to return if the environment variable
-            is not set and required is False. Defaults to None.
-        required (bool, optional): Whether the environment variable is mandatory. If True
-            and the variable is not set, a RuntimeError is raised. Defaults to True.
+     Args:
+         var_name (str): The name of the environment variable to retrieve.
+         default (bool | None, optional): The value to return if the environment variable
+             is not set and required is False. Defaults to None.
+         required (bool, optional): Whether the environment variable is mandatory. If True
+             and the variable is not set, a RuntimeError is raised. Defaults to True.
 
-    Returns:
-        bool | None: The boolean value of the environment variable, or the default if
-        the variable is missing and not required.
+     Returns:
+         bool | None: The boolean value of the environment variable, or the default if
+         the variable is missing and not required.
 
-    Raises:
-        TypeError: If the environment variable is set but cannot be converted to a boolean.
-        RuntimeError: If the environment variable is required but not set.
+     Raises:
+         TypeError: If the environment variable is set but cannot be converted to a boolean.
+         RuntimeError: If the environment variable is required but not set.
     """
     from pysafe_config._helper_bool import _str_to_bool
 
@@ -63,45 +63,45 @@ def getenv_float(
     var_name: str, default: float | None = None, required: bool = True
 ) -> float | None:
     """
-   Get the value of a float environment variable `var_name`
+    Get the value of a float environment variable `var_name`
 
-    If the environment variable is not set:
-        - If `required` is True, a RuntimeError is raised indicating that the variable
-          is mandatory.
-        - If `required` is False, the function returns the default value, which may be
-          None if no default is provided.
+     If the environment variable is not set:
+         - If `required` is True, a RuntimeError is raised indicating that the variable
+           is mandatory.
+         - If `required` is False, the function returns the default value, which may be
+           None if no default is provided.
 
-    Valid float strings must:
-        - Contain only digits (`0-9`), optionally preceded by a single `+` or `-` sign
-        - Include exactly one decimal point to separate the whole and fractional parts
-        - Not contain any whitespace, commas, or alphabetic characters
+     Valid float strings must:
+         - Contain only digits (`0-9`), optionally preceded by a single `+` or `-` sign
+         - Include exactly one decimal point to separate the whole and fractional parts
+         - Not contain any whitespace, commas, or alphabetic characters
 
-    Examples:
+     Examples:
 
-        | Valid strings | Invalid strings |
-        |----------------|-----------------|
-        | "50.2"         | "50"            |
-        | "-0.0"         | "5.5.5"         |
-        | "+1000.5"      | " 12.3"         |
-        | "-99.0"        | "12,3"          |
-        | "0.0001"       | "ten"           |
-        | "+.5"          | "5."            |
-        | "-1.23"        | "" (empty)      |
+         | Valid strings | Invalid strings |
+         |----------------|-----------------|
+         | "50.2"         | "50"            |
+         | "-0.0"         | "5.5.5"         |
+         | "+1000.5"      | " 12.3"         |
+         | "-99.0"        | "12,3"          |
+         | "0.0001"       | "ten"           |
+         | "+.5"          | "5."            |
+         | "-1.23"        | "" (empty)      |
 
-    Args:
-        var_name (str): The name of the environment variable to retrieve.
-        default (float | None, optional): The value to return if the environment variable
-            is not set and required is False. Defaults to None.
-        required (bool, optional): Whether the environment variable is mandatory. If True
-            and the variable is not set, a RuntimeError is raised. Defaults to True.
+     Args:
+         var_name (str): The name of the environment variable to retrieve.
+         default (float | None, optional): The value to return if the environment variable
+             is not set and required is False. Defaults to None.
+         required (bool, optional): Whether the environment variable is mandatory. If True
+             and the variable is not set, a RuntimeError is raised. Defaults to True.
 
-    Returns:
-        float | None: The string value of the environment variable, or the default if
-        the variable is missing and not required.
+     Returns:
+         float | None: The string value of the environment variable, or the default if
+         the variable is missing and not required.
 
-    Raises:
-        TypeError: If the environment variable is set but cannot be converted to a string.
-        RuntimeError: If the environment variable is required but not set.
+     Raises:
+         TypeError: If the environment variable is set but cannot be converted to a string.
+         RuntimeError: If the environment variable is required but not set.
     """
     from pysafe_config._helper_float import _str_to_float
 
@@ -112,28 +112,28 @@ def getenv_str(
     var_name: str, default: str | None = None, required: bool = True
 ) -> str | None:
     """
-   Get the value of a str environment variable `var_name`
+    Get the value of a str environment variable `var_name`
 
-    If the environment variable is not set:
-        - If `required` is True, a RuntimeError is raised indicating that the variable
-          is mandatory.
-        - If required is False, the function returns the default value, which may be
-          None if no default is provided.
+     If the environment variable is not set:
+         - If `required` is True, a RuntimeError is raised indicating that the variable
+           is mandatory.
+         - If required is False, the function returns the default value, which may be
+           None if no default is provided.
 
-    Args:
-        var_name (str): The name of the environment variable to retrieve.
-        default (str | None, optional): The value to return if the environment variable
-            is not set and required is False. Defaults to None.
-        required (bool, optional): Whether the environment variable is mandatory. If True
-            and the variable is not set, a RuntimeError is raised. Defaults to True.
+     Args:
+         var_name (str): The name of the environment variable to retrieve.
+         default (str | None, optional): The value to return if the environment variable
+             is not set and required is False. Defaults to None.
+         required (bool, optional): Whether the environment variable is mandatory. If True
+             and the variable is not set, a RuntimeError is raised. Defaults to True.
 
-    Returns:
-        str | None: The string value of the environment variable, or the default if
-        the variable is missing and not required.
+     Returns:
+         str | None: The string value of the environment variable, or the default if
+         the variable is missing and not required.
 
-    Raises:
-        TypeError: If the environment variable is set but cannot be converted to a string.
-        RuntimeError: If the environment variable is required but not set.
+     Raises:
+         TypeError: If the environment variable is set but cannot be converted to a string.
+         RuntimeError: If the environment variable is required but not set.
     """
     from pysafe_config._helper_str import _str_to_str
 
@@ -144,46 +144,46 @@ def getenv_int(
     var_name: str, default: int | None = None, required: bool = True
 ) -> int | None:
     """
-   Get the value of an int environment variable `var_name`
+    Get the value of an int environment variable `var_name`
 
-    If the environment variable is not set:
-        - If `required` is True, a RuntimeError is raised indicating that the variable
-          is mandatory.
-        - If `required` is False, the function returns the default value, which may be
-          None if no default is provided.
+     If the environment variable is not set:
+         - If `required` is True, a RuntimeError is raised indicating that the variable
+           is mandatory.
+         - If `required` is False, the function returns the default value, which may be
+           None if no default is provided.
 
-    Valid integer environment variables must:
-        - Contain only digits (`0-9`), optionally preceded by a single `+` or `-` sign
-        - Not contain any whitespace
-        - Not include decimal points, letters, or special symbols
+     Valid integer environment variables must:
+         - Contain only digits (`0-9`), optionally preceded by a single `+` or `-` sign
+         - Not contain any whitespace
+         - Not include decimal points, letters, or special symbols
 
-    Examples:
+     Examples:
 
-        | Valid strings | Invalid strings |
-        |----------------|-----------------|
-        | "100"          | " 100"          |
-        | "1"            | "10.5"          |
-        | "-50"          | "1,000"         |
-        | "+1000"        | "12a"           |
-        | "0"            | "++5"           |
-        | "-0"           | "5-"            |
-        | "123456        | "ten"           |
-        | "-123456"      | "" (empty)      |
+         | Valid strings | Invalid strings |
+         |----------------|-----------------|
+         | "100"          | " 100"          |
+         | "1"            | "10.5"          |
+         | "-50"          | "1,000"         |
+         | "+1000"        | "12a"           |
+         | "0"            | "++5"           |
+         | "-0"           | "5-"            |
+         | "123456        | "ten"           |
+         | "-123456"      | "" (empty)      |
 
-    Args:
-        var_name (str): The name of the environment variable to retrieve.
-        default (int | None, optional): The value to return if the environment variable
-            is not set and required is False. Defaults to None.
-        required (bool, optional): Whether the environment variable is mandatory. If True
-            and the variable is not set, a RuntimeError is raised. Defaults to True.
+     Args:
+         var_name (str): The name of the environment variable to retrieve.
+         default (int | None, optional): The value to return if the environment variable
+             is not set and required is False. Defaults to None.
+         required (bool, optional): Whether the environment variable is mandatory. If True
+             and the variable is not set, a RuntimeError is raised. Defaults to True.
 
-    Returns:
-        int | None: The string value of the environment variable, or the default if
-        the variable is missing and not required.
+     Returns:
+         int | None: The string value of the environment variable, or the default if
+         the variable is missing and not required.
 
-    Raises:
-        TypeError: If the environment variable is set but cannot be converted to a string.
-        RuntimeError: If the environment variable is required but not set.
+     Raises:
+         TypeError: If the environment variable is set but cannot be converted to a string.
+         RuntimeError: If the environment variable is required but not set.
     """
 
     from pysafe_config._helper_int import _str_to_int
