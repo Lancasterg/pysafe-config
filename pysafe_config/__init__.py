@@ -1,3 +1,6 @@
+from pysafe_config._getenv import _getenv_strict, _getenv
+
+
 __all__ = [
     "getenv_bool",
     "getenv_float",
@@ -7,47 +10,136 @@ __all__ = [
     "getenv_float_strict",
     "getenv_int_strict",
     "getenv_str_strict",
-    "getenv_int_strict_2"
 ]
-
-
-def getenv_int_strict_2(var_name: str) -> int:
-    from ._getenv import _getenv_strict as _getenv_int_func
-
-    return _getenv_int_func(var_name, int)
 
 
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
-    from pysafe_config._getenv_bool import getenv_bool as _getenv_bool_func
+    """
+    Get the value of an environment variable specified by `var_name`, returned as a boolean.
 
-    return _getenv_bool_func(var_name, default=default, required=required)
+    If the environment variable is not set:
+      - If `required` is True, a RuntimeError is raised indicating that the variable
+        is mandatory.
+      - If `required` is False, the function returns the default value, which may be
+        None if no default is provided.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+        default (bool | None, optional): The value to return if the environment variable
+            is not set and required is False. Defaults to None.
+        required (bool, optional): Whether the environment variable is mandatory. If True
+            and the variable is not set, a RuntimeError is raised. Defaults to True.
+
+    Returns:
+        bool | None: The string value of the environment variable, or the default if
+        the variable is missing and not required.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is required but not set.
+    """
+    from pysafe_config._helper_bool import _str_to_bool
+
+    return _getenv(var_name, bool, _str_to_bool, default=default, required=required)
 
 
 def getenv_float(
     var_name: str, default: float | None = None, required: bool = True
 ) -> float | None:
-    from pysafe_config._getenv_float import getenv_float as _getenv_float_func
+    """
+    Get the value of an environment variable specified by `var_name`, returned as a float.
 
-    return _getenv_float_func(var_name, default=default, required=required)
+    If the environment variable is not set:
+      - If `required` is True, a RuntimeError is raised indicating that the variable
+        is mandatory.
+      - If `required` is False, the function returns the default value, which may be
+        None if no default is provided.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+        default (float | None, optional): The value to return if the environment variable
+            is not set and required is False. Defaults to None.
+        required (bool, optional): Whether the environment variable is mandatory. If True
+            and the variable is not set, a RuntimeError is raised. Defaults to True.
+
+    Returns:
+        float | None: The string value of the environment variable, or the default if
+        the variable is missing and not required.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is required but not set.
+    """
+    from pysafe_config._helper_float import _str_to_float
+
+    return _getenv(var_name, float, _str_to_float, default=default, required=required)
 
 
 def getenv_str(
     var_name: str, default: str | None = None, required: bool = True
 ) -> str | None:
-    from pysafe_config._getenv_str import getenv_str as _getenv_str_func
+    """
+    Get the value of an environment variable specified by `var_name`, returned as a string.
 
-    return _getenv_str_func(var_name, default=default, required=required)
+    If the environment variable is not set:
+      - If `required` is True, a RuntimeError is raised indicating that the variable
+        is mandatory.
+      - If required is False, the function returns the default value, which may be
+        None if no default is provided.
+
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+        default (str | None, optional): The value to return if the environment variable
+            is not set and required is False. Defaults to None.
+        required (bool, optional): Whether the environment variable is mandatory. If True
+            and the variable is not set, a RuntimeError is raised. Defaults to True.
+
+    Returns:
+        str | None: The string value of the environment variable, or the default if
+        the variable is missing and not required.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is required but not set.
+    """
+    from pysafe_config._helper_str import _str_to_str
+
+    return _getenv(var_name, str, _str_to_str, default=default, required=required)
 
 
 def getenv_int(
     var_name: str, default: int | None = None, required: bool = True
 ) -> int | None:
+    """
+    Get the value of an environment variable specified by `var_name`, returned as an integer.
 
-    from pysafe_config._getenv_int import getenv_int as _getenv_int_func
+    If the environment variable is not set:
+      - If `required` is True, a RuntimeError is raised indicating that the variable
+        is mandatory.
+      - If `required` is False, the function returns the default value, which may be
+        None if no default is provided.
 
-    return _getenv_int_func(var_name, default=default, required=required)
+    Args:
+        var_name (str): The name of the environment variable to retrieve.
+        default (int | None, optional): The value to return if the environment variable
+            is not set and required is False. Defaults to None.
+        required (bool, optional): Whether the environment variable is mandatory. If True
+            and the variable is not set, a RuntimeError is raised. Defaults to True.
+
+    Returns:
+        int | None: The string value of the environment variable, or the default if
+        the variable is missing and not required.
+
+    Raises:
+        TypeError: If the environment variable is set but cannot be converted to a string.
+        RuntimeError: If the environment variable is required but not set.
+    """
+
+    from pysafe_config._helper_int import _str_to_int
+
+    return _getenv(var_name, int, _str_to_int, default=default, required=required)
 
 
 def getenv_bool_strict(var_name: str) -> bool:
@@ -64,9 +156,9 @@ def getenv_bool_strict(var_name: str) -> bool:
         TypeError: If the environment variable is set but cannot be converted to a string.
         RuntimeError: If the environment variable is not set.
     """
-    from ._getenv_bool import getenv_bool_strict as _getenv_bool_func
+    from ._helper_bool import _str_to_bool
 
-    return _getenv_bool_func(var_name)
+    return _getenv_strict(var_name, bool, _str_to_bool)
 
 
 def getenv_float_strict(var_name: str) -> float:
@@ -83,9 +175,9 @@ def getenv_float_strict(var_name: str) -> float:
         TypeError: If the environment variable is set but cannot be converted to a string.
         RuntimeError: If the environment variable is not set.
     """
-    from ._getenv_float import getenv_float_strict as _getenv_float_func
+    from ._helper_float import _str_to_float
 
-    return _getenv_float_func(var_name)
+    return _getenv_strict(var_name, float, _str_to_float)
 
 
 def getenv_str_strict(var_name: str) -> str:
@@ -102,9 +194,9 @@ def getenv_str_strict(var_name: str) -> str:
         TypeError: If the environment variable is set but cannot be converted to a string.
         RuntimeError: If the environment variable is not set.
     """
-    from ._getenv_str import getenv_str_strict as _getenv_str_func
+    from ._helper_str import _str_to_str
 
-    return _getenv_str_func(var_name)
+    return _getenv_strict(var_name, str, _str_to_str)
 
 
 def getenv_int_strict(var_name: str) -> int:
@@ -121,16 +213,6 @@ def getenv_int_strict(var_name: str) -> int:
         TypeError: If the environment variable is set but cannot be converted to a string.
         RuntimeError: If the environment variable is not set.
     """
-    from ._getenv_int import getenv_int_strict as _getenv_int_func
+    from ._helper_int import _str_to_int
 
-    return _getenv_int_func(var_name)
-
-
-# T = TypeVar("T")
-#
-#
-# def getenv_enum(
-#     var_name: str, return_type: T, default: float | None = None, required: bool = True
-# ) -> T:
-#     from ._getenv_enum import getenv_enum as _getenv_enum_func
-#     return _getenv_enum_func(var_name, return_type, default=default, required=required)
+    return _getenv_strict(var_name, int, _str_to_int)

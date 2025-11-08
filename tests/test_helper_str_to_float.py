@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config._getenv_float import _str_to_float
+from pysafe_config._helper_float import _str_to_float
 
 
 @pytest.mark.parametrize(
