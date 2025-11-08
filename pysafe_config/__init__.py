@@ -179,21 +179,25 @@ def getenv_float_strict(var_name: str) -> float:
     """
     Get the value of an environment variable, guaranteeing the return type as a float.
 
-    A single decimal point is required in the variable value otherwise a TypeError will be raised
+    The value must represent a valid floating-point number.
+    A single decimal point is required in the variable value; otherwise, a `TypeError` will be raised.
 
-    Valid float strings must not:
-        - Have any whitespace
-        - Contain any non-numeric characters other than a
-          plus or minus sign at the beginning of the number
-          and a decimal point to separate the whole and fractional
-          part of the number.
+    Valid float strings must:
+      - Contain only digits (`0-9`), optionally preceded by a single `+` or `-` sign
+      - Include exactly one decimal point to separate the whole and fractional parts
+      - Not contain any whitespace, commas, or alphabetic characters
 
+    Examples:
 
-    Some valid examples of integer strings are
-        - "50.2"
-        - "-0.0"
-        - "+1000.5"
-        - "-99.0"
+        | Valid strings | Invalid strings |
+        |----------------|-----------------|
+        | "50.2"         | "50"            |
+        | "-0.0"         | "5.5.5"         |
+        | "+1000.5"      | " 12.3"         |
+        | "-99.0"        | "12,3"          |
+        | "0.0001"       | "ten"           |
+        | "+.5"          | "5."            |
+        | "-1.23"        | "" (empty)      |
 
     Args:
         var_name (str): The name of the environment variable to retrieve.
