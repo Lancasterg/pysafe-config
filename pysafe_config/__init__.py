@@ -1,4 +1,4 @@
-from pysafe_config._getenv import _getenv_strict, _getenv
+from ._getenv import _getenv_strict, _getenv
 
 
 __all__ = [
