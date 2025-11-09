@@ -18,6 +18,7 @@ mypy = "^1.18.2"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^7.0.0"
+pytest-cov = "^7.0.0"
 
 [build-system]
 requires = ["poetry-core"]
