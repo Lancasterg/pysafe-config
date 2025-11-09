@@ -1,6 +1,6 @@
 # pysafe-config
 
-`pysafe-config` is a lightweight Python package designed to simplify and secure the process of reading environment variables. It provides a set of functions for each of the common types used for environment variables to reduce boilerplate code, enforce type safety, and handle missing variables gracefully, making application config more robust and easier to manage.
+[pysafe-config](https://pypi.org/project/pysafe-config/) is a lightweight Python package designed to simplify and secure the process of reading environment variables. It provides a set of functions for each of the common types used for environment variables to reduce boilerplate code, enforce type safety, and handle missing variables gracefully, making application config more robust and easier to manage.
 
 ## The Problem: Boilerplate and Error-Prone Environment Variable Handling
 
@@ -165,5 +165,11 @@ Contributions are welcome! Please refer to the `CONTRIBUTING.md` for guidelines.
 This project is licensed under the MIT License.
 
 ## Release docs
+The release process needs work, but for now:
 
-TODO: add steps on how to release here
+1. Ensure to bump the version number in pyproject.toml
+2. Get the names of the closed PRs since the last release 
+3. Create a new release, paste in the names of the previous MRs into the changelog
+4. Create the new tag, being sure to use the next version up since the previous release
+5. Go to Actions and approve the github workflow
+6. Once finished, try installing the latest version in a shell using `pip install pysafe-config`
