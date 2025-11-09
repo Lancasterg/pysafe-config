@@ -163,3 +163,7 @@ Contributions are welcome! Please refer to the `CONTRIBUTING.md` for guidelines.
 ## License
 
 This project is licensed under the MIT License.
+
+## Release docs
+
+TODO: add steps on how to release here
