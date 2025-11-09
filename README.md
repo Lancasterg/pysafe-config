@@ -173,3 +173,7 @@ The release process needs work, but for now:
 4. Create the new tag, being sure to use the next version up since the previous release
 5. Go to Actions and approve the github workflow
 6. Once finished, try installing the latest version in a shell using `pip install pysafe-config`
+
+## Future work
+- Add more types for env vars (Enums)
+- Test the error strings in error messages
