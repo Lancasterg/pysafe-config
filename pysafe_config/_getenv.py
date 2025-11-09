@@ -11,7 +11,7 @@ def _getenv(
     return_type: type[T],
     helper_function: Callable[[str], T],
     default: T | None = None,
-    required: bool = True,
+    required: bool = False,
 ) -> T | None:
     """
     The function gets the value of an environment variable specified by `var_name` and
@@ -28,7 +28,7 @@ def _getenv(
         default (type[T] | None, optional): The value to return if the environment variable
             is not set and required is False. Defaults to None.
         required (bool, optional): Whether the environment variable is mandatory. If True
-            and the variable is not set, a RuntimeError is raised. Defaults to True.
+            and the variable is not set, a RuntimeError is raised. Defaults to False.
 
     Returns:
         T | None: The value of the environment variable coerced into a `return_type` type, or
