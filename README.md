@@ -31,7 +31,7 @@ SAMPLING_RATIO: float = getenv_float_strict("SAMPLING_RATIO")
 ## Features and Benefits
 
 *   **Reduced Boilerplate**: Significantly cuts down the amount of code needed to read and validate environment variables.
-*   **Type Safety**: Automatically converts environment variable strings to the desired Python types (bool, int, float, str) and raises `TypeError` if conversion fails.
+*   **Type Safety**: Automatically converts environment variable strings to the desired Python types (bool, int, float, str) and raises `TypeError` if conversion fails. If using the strict version of a getenv function, the return type is guaranteed and will allow mypy to recognise the variable as the correct type.
 *   **Strict Mode**: Functions like `getenv_float_strict` ensure that a `RuntimeError` is raised if a mandatory environment variable is not set, preventing silent failures.
 *   **Flexible Handling**: Provides both strict and non-strict versions of functions. Non-strict versions (`getenv_bool`, `getenv_float`, etc.) allow you to specify a `default` value and control whether a variable is `required`.
 *   **Clear Error Messages**: Provides descriptive error messages for missing or invalid environment variables, aiding in quicker debugging.
