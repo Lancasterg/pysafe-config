@@ -177,3 +177,5 @@ The release process needs work, but for now:
 ## Future work
 - Add more types for env vars (Enums)
 - Test the error strings in error messages
+- put build passing / failing tag on repo
+- put code coverage tag on repo

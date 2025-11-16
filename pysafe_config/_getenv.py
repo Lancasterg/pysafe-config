@@ -1,9 +1,31 @@
 import os
-from typing import TypeVar, Callable
+from typing import TypeVar, Callable, overload, Literal
 
 T = TypeVar("T")
 
 _allowed_types = [bool, int, float, str]
+
+
+@overload
+def _getenv(
+    var_name: str,
+    return_type: type[T],
+    helper_function: Callable[[str], T],
+    default: T | None = None,
+    required: Literal[True] = True,
+) -> T:
+    ...
+
+
+@overload
+def _getenv(
+    var_name: str,
+    return_type: type[T],
+    helper_function: Callable[[str], T],
+    default: T | None = None,
+    required: Literal[False] = False,
+) -> T | None:
+    ...
 
 
 def _getenv(
