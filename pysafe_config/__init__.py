@@ -1,16 +1,20 @@
+from typing import overload, Literal
+
 from ._getenv import _getenv_strict, _getenv
 
+__all__ = ["getenv_bool", "getenv_float", "getenv_str", "getenv_int"]
 
-__all__ = [
-    "getenv_bool",
-    "getenv_float",
-    "getenv_str",
-    "getenv_int",
-    "getenv_bool_strict",
-    "getenv_float_strict",
-    "getenv_int_strict",
-    "getenv_str_strict",
-]
+
+@overload
+def getenv_bool(
+    var_name: str, default: bool | None = None, required: Literal[True] = True
+) -> bool: ...
+
+
+@overload
+def getenv_bool(
+    var_name: str, default: bool | None = None, required: Literal[False] = False
+) -> bool: ...
 
 
 def getenv_bool(
