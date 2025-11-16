@@ -1,6 +1,6 @@
 from typing import overload, Literal
 
-from ._getenv import _getenv_strict, _getenv
+from ._getenv import _getenv
 
 __all__ = ["getenv_bool", "getenv_float", "getenv_str", "getenv_int"]
 
@@ -184,6 +184,7 @@ def getenv_str(
     from pysafe_config._helper_str import _str_to_str
 
     return _getenv(var_name, str, _str_to_str, default=default, required=required)
+
 
 @overload
 def getenv_int(

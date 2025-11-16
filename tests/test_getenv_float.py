@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config import getenv_float, getenv_float_strict
+from pysafe_config import getenv_float
 
 
 def test_getenv_float_default_unset_required_true(monkeypatch):
@@ -51,27 +51,3 @@ def test_getenv_float_invalid_type_float_raises_exception(monkeypatch):
 
     with pytest.raises(ValueError):
         _ = getenv_float("SAMPLING_RATIO")
-
-
-def test_getenv_float_strict_set(monkeypatch):
-    expected = 100.0
-
-    monkeypatch.setenv("SAMPLING_RATIO", "100.0")
-
-    result = getenv_float_strict("SAMPLING_RATIO")
-
-    assert result == expected
-
-
-def test_getenv_float_strict_invalid_var_raises_exception(monkeypatch):
-
-    monkeypatch.setenv("SAMPLING_RATIO", "100")
-
-    with pytest.raises(ValueError):
-        _ = getenv_float_strict("SAMPLING_RATIO")
-
-
-def test_getenv_float_strict_unset_raises_exception(monkeypatch):
-
-    with pytest.raises(RuntimeError):
-        _ = getenv_float_strict("SAMPLING_RATIO")
