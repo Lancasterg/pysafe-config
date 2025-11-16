@@ -14,6 +14,12 @@ def getenv_bool(
 @overload
 def getenv_bool(
     var_name: str, default: bool | None = None, required: Literal[False] = False
+) -> bool | None: ...
+
+
+@overload
+def getenv_bool(
+    var_name: str, default: bool | None = None, required: bool = False
 ) -> bool: ...
 
 
@@ -61,6 +67,24 @@ def getenv_bool(
     from pysafe_config._helper_bool import _str_to_bool
 
     return _getenv(var_name, bool, _str_to_bool, default=default, required=required)
+
+
+@overload
+def getenv_float(
+    var_name: str, default: float | None = None, required: Literal[True] = True
+) -> float: ...
+
+
+@overload
+def getenv_float(
+    var_name: str, default: float | None = None, required: Literal[False] = False
+) -> float | None: ...
+
+
+@overload
+def getenv_float(
+    var_name: str, default: float | None = None, required: bool = False
+) -> float | None: ...
 
 
 def getenv_float(
@@ -112,6 +136,24 @@ def getenv_float(
     return _getenv(var_name, float, _str_to_float, default=default, required=required)
 
 
+@overload
+def getenv_str(
+    var_name: str, default: str | None = None, required: Literal[True] = True
+) -> str: ...
+
+
+@overload
+def getenv_str(
+    var_name: str, default: str | None = None, required: Literal[False] = False
+) -> str | None: ...
+
+
+@overload
+def getenv_str(
+    var_name: str, default: str | None = None, required: bool = False
+) -> str | None: ...
+
+
 def getenv_str(
     var_name: str, default: str | None = None, required: bool = True
 ) -> str | None:
@@ -142,6 +184,23 @@ def getenv_str(
     from pysafe_config._helper_str import _str_to_str
 
     return _getenv(var_name, str, _str_to_str, default=default, required=required)
+
+@overload
+def getenv_int(
+    var_name: str, default: int | None = None, required: Literal[True] = True
+) -> int: ...
+
+
+@overload
+def getenv_int(
+    var_name: str, default: int | None = None, required: Literal[False] = False
+) -> int | None: ...
+
+
+@overload
+def getenv_int(
+    var_name: str, default: int | None = None, required: bool = False
+) -> int | None: ...
 
 
 def getenv_int(
