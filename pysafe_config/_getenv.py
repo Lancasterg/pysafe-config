@@ -13,10 +13,7 @@ def _getenv(
     helper_function: Callable[[str], T],
     default: T | None = None,
     required: Literal[True] = True,
-) -> T:
-    return _getenv(var_name, return_type, helper_function, default, True)
-
-
+) -> T: ...
 @overload
 def _getenv(
     var_name: str,
@@ -25,8 +22,6 @@ def _getenv(
     default: T | None = None,
     required: Literal[False] = False,
 ) -> T | None: ...
-
-
 @overload
 def _getenv(
     var_name: str,
@@ -35,8 +30,6 @@ def _getenv(
     default: T | None = ...,
     required: bool = ...,
 ) -> T | None: ...
-
-
 def _getenv(
     var_name: str,
     return_type: type[T],
