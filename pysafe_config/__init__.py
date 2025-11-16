@@ -9,20 +9,14 @@ __all__ = ["getenv_bool", "getenv_float", "getenv_str", "getenv_int"]
 def getenv_bool(
     var_name: str, default: bool | None = None, required: Literal[True] = True
 ) -> bool: ...
-
-
 @overload
 def getenv_bool(
     var_name: str, default: bool | None = None, required: Literal[False] = False
 ) -> bool | None: ...
-
-
 @overload
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = False
 ) -> bool: ...
-
-
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
@@ -73,20 +67,14 @@ def getenv_bool(
 def getenv_float(
     var_name: str, default: float | None = None, required: Literal[True] = True
 ) -> float: ...
-
-
 @overload
 def getenv_float(
     var_name: str, default: float | None = None, required: Literal[False] = False
 ) -> float | None: ...
-
-
 @overload
 def getenv_float(
     var_name: str, default: float | None = None, required: bool = False
 ) -> float | None: ...
-
-
 def getenv_float(
     var_name: str, default: float | None = None, required: bool = True
 ) -> float | None:
@@ -140,20 +128,14 @@ def getenv_float(
 def getenv_str(
     var_name: str, default: str | None = None, required: Literal[True] = True
 ) -> str: ...
-
-
 @overload
 def getenv_str(
     var_name: str, default: str | None = None, required: Literal[False] = False
 ) -> str | None: ...
-
-
 @overload
 def getenv_str(
     var_name: str, default: str | None = None, required: bool = False
 ) -> str | None: ...
-
-
 def getenv_str(
     var_name: str, default: str | None = None, required: bool = True
 ) -> str | None:
@@ -190,20 +172,14 @@ def getenv_str(
 def getenv_int(
     var_name: str, default: int | None = None, required: Literal[True] = True
 ) -> int: ...
-
-
 @overload
 def getenv_int(
     var_name: str, default: int | None = None, required: Literal[False] = False
 ) -> int | None: ...
-
-
 @overload
 def getenv_int(
     var_name: str, default: int | None = None, required: bool = False
 ) -> int | None: ...
-
-
 def getenv_int(
     var_name: str, default: int | None = None, required: bool = True
 ) -> int | None:
