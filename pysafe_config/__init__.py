@@ -16,7 +16,7 @@ def getenv_bool(
 @overload
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = False
-) -> bool: ...
+) -> bool | None: ...
 def getenv_bool(
     var_name: str, default: bool | None = None, required: bool = True
 ) -> bool | None:
