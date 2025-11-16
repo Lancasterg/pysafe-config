@@ -37,12 +37,11 @@ SAMPLING_RATIO: float = getenv_float("SAMPLING_RATIO")
 
 ## Features and Benefits
 
+*   **Strict By Default**: Raise an exception if no environment variable is set by default, unless it has explicitly been marked as optional, preventing silent failures.
+*   **Consistent Validation**: Enforces strict, consistent and reliable validation rules for different types, using a sensible and deterministic approach.
+*   **Clear and Verbose Error Messages**: Provides descriptive error messages for missing or invalid environment variables.
 *   **Reduced Boilerplate**: Significantly cuts down the amount of code needed to read and validate environment variables.
-*   **Type Safety**: Automatically converts environment variable to the desired Python types (`bool`, `int`, `float`, `str`) using a sensible and deterministic approach, raising a `TypeError` if type conversion fails.
-*   **Strict Mode**: If required ensure that a `RuntimeError` is raised if a mandatory environment variable is not set, preventing silent failures.
-*   **Flexible Handling**: Provides both strict and non-strict versions of functions. Non-strict versions (`getenv_bool`, `getenv_float`, etc.) allow you to specify a `default` value and control whether a variable is `required`.
-*   **Clear Error Messages**: Provides descriptive error messages for missing or invalid environment variables, aiding in quicker debugging.
-*   **Consistent Validation**: Enforces strict validation rules for different types (e.g., specific formats for floats and integers, a predefined set of true/false strings for booleans).
+*   **Type Safety**: Works with all modern type linters. No more checking for Nones and raising errors in config files.
 
 ## Installation
 
@@ -155,7 +154,10 @@ The release process needs work, but for now:
 6. Once finished, try installing the latest version in a shell using `pip install pysafe-config`
 
 ## Future work
-- Add more types for env vars (Enums)
+- Add a function for parsing enums from environment variables
+- Add a function that allows the user to pass the type they are expecting into a get_env function
+  - `get_env("NUM_ROWS", int, ...)`
 - Test the error strings in error messages
 - put build passing / failing tag on repo
-- put code coverage tag on repo
+- put code coverage tag on repo (It is 100%)
+- Create a web page for proper docs
