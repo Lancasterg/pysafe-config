@@ -1,9 +1,9 @@
+from inspect import isfunction
+from typing import get_overloads, get_type_hints
+
 import pytest
 
 from pysafe_config import getenv_bool
-
-from typing import get_overloads, get_type_hints
-from inspect import isfunction
 
 
 def test_getenv_bool_default_true_unset_required_true(monkeypatch):
