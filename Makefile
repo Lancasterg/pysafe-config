@@ -10,6 +10,7 @@ format:
 	# Format tests first
 	poetry run python -m isort tests
 	poetry run python -m black tests
+
 	# The the package itself
 	poetry run python -m isort pysafe_config
 	poetry run python -m black pysafe_config
