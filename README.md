@@ -1,10 +1,17 @@
 # pysafe-config
 
-[pysafe-config](https://pypi.org/project/pysafe-config/) is a lightweight Python package designed to simplify and secure the process of reading environment variables. It provides a set of functions for each of the common types used for environment variables to reduce boilerplate code, enforce type safety, and handle missing variables gracefully, making application config more robust and easier to manage.
+`pysafe-config` is a lightweight Python package designed to simplify the process of reading environment variables whilst maintaining strict type safety. 
+
+It provides a set of four public functions, one for each of the following types: `[str, int, float, bool]` (Enums may be supported in the future). 
+
+The main objectives of the package are to enforce type safety, reduce boilerplate code and handle missing variables gracefully, therefore making application config more robust and easier to manage.
+
+[pypi](https://pypi.org/project/pysafe-config/)
+
 
 ## The Problem: Boilerplate and Error-Prone Environment Variable Handling
 
-Without `pysafe-config`, handling environment variables often involves repetitive and error-prone code, especially when dealing with type conversions and mandatory checks. Consider the common scenario of retrieving a `SAMPLING_RATIO` as a float:
+Handling environment variables often involves repetitive and error-prone code, especially when dealing with type conversions and mandatory checks. Consider the common scenario of retrieving a `SAMPLING_RATIO` as a float:
 
 ```python
 import os
@@ -23,19 +30,18 @@ This approach is verbose, susceptible to `ValueError` if the conversion fails, a
 `pysafe-config` streamlines this process, allowing you to retrieve and validate environment variables with minimal code. The previous example can be reduced to a single, clear line:
 
 ```python
-from pysafe_config import getenv_float_strict
+from pysafe_config import getenv_float
 
-SAMPLING_RATIO: float = getenv_float_strict("SAMPLING_RATIO")
+SAMPLING_RATIO: float = getenv_float("SAMPLING_RATIO")
 ```
 
 ## Features and Benefits
 
+*   **Strict By Default**: Raise an exception if no environment variable is set by default, unless it has explicitly been marked as optional, preventing silent failures.
+*   **Consistent Validation**: Enforces strict, consistent and reliable validation rules for different types, using a sensible and deterministic approach.
+*   **Clear and Verbose Error Messages**: Provides descriptive error messages for missing or invalid environment variables.
 *   **Reduced Boilerplate**: Significantly cuts down the amount of code needed to read and validate environment variables.
-*   **Type Safety**: Automatically converts environment variable strings to the desired Python types (bool, int, float, str) and raises `TypeError` if conversion fails. If using the strict version of a getenv function, the return type is guaranteed and will allow mypy to recognise the variable as the correct type.
-*   **Strict Mode**: Functions like `getenv_float_strict` ensure that a `RuntimeError` is raised if a mandatory environment variable is not set, preventing silent failures.
-*   **Flexible Handling**: Provides both strict and non-strict versions of functions. Non-strict versions (`getenv_bool`, `getenv_float`, etc.) allow you to specify a `default` value and control whether a variable is `required`.
-*   **Clear Error Messages**: Provides descriptive error messages for missing or invalid environment variables, aiding in quicker debugging.
-*   **Consistent Validation**: Enforces strict validation rules for different types (e.g., specific formats for floats and integers, a predefined set of true/false strings for booleans).
+*   **Type Safety**: Works with all modern type linters. No more checking for Nones and raising errors in config files.
 
 ## Installation
 
@@ -51,57 +57,30 @@ pip install pysafe-config
 
 ## Usage
 
-### Getting Started
-
-Import the required function from `pysafe_config`. Public functions can be imported like so:
+The default behaviour is that a `RuntimeError` will be raised if the variable is missing, or a `ValueError` if the type conversion fails.
+This behaviour can be switched off if the function is called with `required=False`
 
 ```python
 from pysafe_config import (
-    getenv_bool,
-    getenv_float,
     getenv_int,
     getenv_str,
-    getenv_bool_strict,
-    getenv_float_strict,
-    getenv_int_strict,
-    getenv_str_strict,
+    getenv_bool,
+    getenv_float,
 )
-```
-
-### Strict Retrieval (Recommended for Mandatory Variables)
-
-Use the `_strict` functions when an environment variable *must* be present and correctly typed. These functions will raise a `RuntimeError` if the variable is missing or a `ValueError` if the type conversion fails.
-
-```python
-# Mandatory float environment variable
-DATABASE_TIMEOUT: float = getenv_float_strict("DATABASE_TIMEOUT")
-
-# Mandatory boolean environment variable
-FEATURE_FLAG_ENABLED: bool = getenv_bool_strict("FEATURE_FLAG_ENABLED")
-
-# Mandatory integer environment variable
-WORKER_COUNT: int = getenv_int_strict("WORKER_COUNT")
-
-# Mandatory string environment variable
-API_KEY: str = getenv_str_strict("API_KEY")
-```
-
-### Flexible Retrieval (with Defaults and Optionality)
-
-Use the non-strict functions when an environment variable is optional or has a sensible default value. You can specify `required=False` and provide a `default` value if the variable cannot be found in the environment.
-
-```python
 # Optional string with a default value
-LOG_LEVEL: str | None = getenv_str("LOG_LEVEL", default="INFO")
+LOG_LEVEL: str | None = getenv_str("LOG_LEVEL", default="INFO", required=False)
 
-# Optional integer, defaults to None if not set
-MAX_RETRIES: int | None = getenv_int("MAX_RETRIES")
+# Required integer - raises a RuntimeError if MAX_RETRIES is unset
+MAX_RETRIES: int = getenv_int("MAX_RETRIES")
 
-# Required boolean with no default (will raise RuntimeError if variable is unset in environment)
-DEBUG_MODE: bool | None = getenv_bool("DEBUG_MODE", required=True)
+# Required boolean with no default -  raises a RuntimeError if DEBUG_MODE is unset
+DEBUG_MODE: bool = getenv_bool("DEBUG_MODE", required=True)
 
-# Required boolean with default value specified (will raise RuntimeError if variable is unset in environment)
-RETURN_UPSTREAM_ERRORS: bool | None = getenv_bool("DEBUG_MODE", default=True, required=True)
+# Optional float with no default value - can return None
+SCALING_FACTOR: float | None = getenv_float("SCALING_FACTOR", required=False)
+
+# Required boolean - raises a ValueError if RETURN_UPSTREAM_ERRORS is not a sensible boolean value
+RETURN_UPSTREAM_ERRORS: bool | None = getenv_bool("RETURN_UPSTREAM_ERRORS")
 ```
 
 ### Supported Boolean Values
@@ -175,5 +154,10 @@ The release process needs work, but for now:
 6. Once finished, try installing the latest version in a shell using `pip install pysafe-config`
 
 ## Future work
-- Add more types for env vars (Enums)
+- Add a function for parsing enums from environment variables
+- Add a function that allows the user to pass the type they are expecting into a get_env function
+  - `get_env("NUM_ROWS", int, ...)`
 - Test the error strings in error messages
+- put build passing / failing tag on repo
+- put code coverage tag on repo (It is 100%)
+- Create a web page for proper docs
