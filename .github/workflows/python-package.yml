@@ -41,9 +41,9 @@ jobs:
 
     - name: Lint
       run: |
-        python -m poetry run python -m isort --check
-        python -m poetry run python -m mypy pysafe_config
+        poetry run python -m isort --check pysafe_config
+        poetry run python -m mypy pysafe_config
 
     - name: Test with pytest
       run: |
-        python -m poetry run python -m pytest tests
+        poetry run python -m pytest tests
