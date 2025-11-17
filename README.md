@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/lancasterg/pysafe-config/branch/main/graph/badge.svg)](https://codecov.io/gh/USERNAME/REPOSITORY)
+
 # pysafe-config
 
 `pysafe-config` is a lightweight Python library designed to simplify the process of reading environment variables.

@@ -4,5 +4,6 @@ __pycache__/
 *.pyc
 .coverage
 dev_tools
-
+*coverage.xml
 htmlcov
+.mypy_cache
