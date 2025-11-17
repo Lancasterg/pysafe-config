@@ -3,13 +3,21 @@ import pytest
 from pysafe_config import _getenv
 
 
-def test_getenv_disallowed_return_type(monkeypatch):
+@pytest.fixture
+def bad_helper_function() -> bytes:
+    return bytes([1, 2, 3])
+
+
+def test_getenv_disallowed_return_type(bad_helper_function, monkeypatch):
     monkeypatch.setenv("ENV_VAR", "fail")
 
-    def _helper_function(_: str) -> bytes:
-        return bytes([1, 2, 3])
-
     with pytest.raises(TypeError):
+
+
         _getenv(
-            "ENV_VAR", bytes, _helper_function, default=bytes([1, 2, 3]), required=False
+            "ENV_VAR",
+            bytes,
+            bad_helper_function,
+            default=bytes([1, 2, 3]),
+            required=False,
         )
