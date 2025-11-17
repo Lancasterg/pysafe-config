@@ -37,7 +37,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry install --with dev
+        poetry install --with dev,test
+
+    - name: Lint
+      run: |
+        python -m poetry run python -m isort --check
+        python -m poetry run python -m mypy pysafe_config
 
     - name: Test with pytest
       run: |

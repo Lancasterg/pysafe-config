@@ -1,6 +1,6 @@
-from pysafe_config import _getenv, _getenv_strict
-
 import pytest
+
+from pysafe_config import _getenv, _getenv_strict
 
 
 def test_getenv_disallowed_return_type(monkeypatch):
