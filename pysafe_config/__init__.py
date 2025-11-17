@@ -1,5 +1,4 @@
-from ._getenv import _getenv_strict, _getenv
-
+from ._getenv import _getenv, _getenv_strict
 
 __all__ = [
     "getenv_bool",
