@@ -1,17 +1,23 @@
 # pysafe-config
 
-`pysafe-config` is a lightweight Python package designed to simplify the process of reading environment variables whilst maintaining strict type safety. 
+`pysafe-config` is a lightweight Python library designed to simplify the process of reading environment variables.
 
-It provides a set of four public functions, one for each of the following types: `[str, int, float, bool]` (Enums may be supported in the future). 
+It provides a set of four fully type-hinted public functions to read environment variables, one for each of the following types `{str, int, float, bool}`.
 
-The main objectives of the package are to enforce type safety, reduce boilerplate code and handle missing variables gracefully, therefore making application config more robust and easier to manage.
+### Links
+- [pypi](https://pypi.org/project/pysafe-config/)
+- [docs](https://lancasterg.github.io/pysafe-config/)
 
-[pypi](https://pypi.org/project/pysafe-config/)
+## Why it exists
+
+### The Problem: Boilerplate and Error-Prone Environment Variable Handling
+
+Handling environment variables isn't something you should be worrying about when writing an application or service in Python. 
+However, it can involve writing repetitive and error-prone code, especially when dealing with large numbers of environment variables requiring casting to their expected types. 
+Other libraries exist to help manage your environment ([Dynaconf](https://www.dynaconf.com/), [py-dotenvsafe](https://pypi.org/project/py-dotenv-safe/)), but what if you just want a type-aware (and as type-safe as possible in Python!) version `os.getenv`?
 
 
-## The Problem: Boilerplate and Error-Prone Environment Variable Handling
-
-Handling environment variables often involves repetitive and error-prone code, especially when dealing with type conversions and mandatory checks. Consider the common scenario of retrieving a `SAMPLING_RATIO` as a float:
+Consider the common scenario of retrieving an environment variable, `SAMPLING_RATIO` as a float:
 
 ```python
 import os
@@ -23,21 +29,27 @@ else:
     SAMPLING_RATIO = float(SAMPLING_RATIO)
 ```
 
-This approach is verbose, susceptible to `ValueError` if the conversion fails, and requires explicit checks for `None`.
+This approach is susceptible to `ValueError` if the conversion fails, requires explicit checks for `None` in the case that the variable is unset, and potentially requires additional validation for weird edge-cases like `"-inf"`.
 
-## The Solution: `pysafe-config`
+### The Solution: `pysafe-config`
 
-`pysafe-config` streamlines this process, allowing you to retrieve and validate environment variables with minimal code. The previous example can be reduced to a single, clear line:
+`pysafe-config` streamlines this process, allowing you to retrieve and validate environment variables with minimal code. The previous example can be reduced to a single clear line.
 
 ```python
 from pysafe_config import getenv_float
 
 SAMPLING_RATIO: float = getenv_float("SAMPLING_RATIO")
+
+# or, for non-critical env vars
+
+SAMPLING_RATIO: float | None = getenv_float("SAMPLING_RATIO", required=False)
 ```
+
+
 
 ## Features and Benefits
 
-*   **Strict By Default**: Raise an exception if no environment variable is set by default, unless it has explicitly been marked as optional, preventing silent failures.
+*   **Strict By Default**: Raises an exception if no environment variable is set by default, unless it has explicitly been marked as optional, preventing silent failures.
 *   **Consistent Validation**: Enforces strict, consistent and reliable validation rules for different types, using a sensible and deterministic approach.
 *   **Clear and Verbose Error Messages**: Provides descriptive error messages for missing or invalid environment variables.
 *   **Reduced Boilerplate**: Significantly cuts down the amount of code needed to read and validate environment variables.
