@@ -11,11 +11,7 @@ def test_getenv_disallowed_return_type(monkeypatch):
 
     with pytest.raises(TypeError):
         _getenv(
-            "ENV_VAR",
-            bytes,
-            _helper_function,
-            default=bytes([1,2,3]),
-            required=False
+            "ENV_VAR", bytes, _helper_function, default=bytes([1, 2, 3]), required=False
         )
 
 
@@ -26,11 +22,7 @@ def test_getenv_strict_disallowed_return_type(monkeypatch):
         return bytes([1, 2, 3])
 
     with pytest.raises(TypeError):
-        _getenv_strict(
-            "ENV_VAR",
-            bytes,
-            _helper_function
-        )
+        _getenv_strict("ENV_VAR", bytes, _helper_function)
 
 
 def test_getenv_strict_disallowed_return_type_post_read(monkeypatch):
@@ -40,8 +32,4 @@ def test_getenv_strict_disallowed_return_type_post_read(monkeypatch):
         return bytes([1, 2, 3])
 
     with pytest.raises(TypeError):
-        _getenv_strict(
-            "ENV_VAR",
-            str,
-            _helper_function
-        )
+        _getenv_strict("ENV_VAR", str, _helper_function)
