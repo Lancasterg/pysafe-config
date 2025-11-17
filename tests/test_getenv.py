@@ -13,7 +13,6 @@ def test_getenv_disallowed_return_type(bad_helper_function, monkeypatch):
 
     with pytest.raises(TypeError):
 
-
         _getenv(
             "ENV_VAR",
             bytes,
