@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "pysafe-config"
-version = "0.0.0"
+version = "1.0.0"
 description = "Type safe environment variables"
 authors = ["Lancasterg <lancaster0180@gmail.com>"]
 readme = "README.md"
 packages = [{include = "pysafe_config"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 
 
 [tool.poetry.group.test.dependencies]
