@@ -1,0 +1,12 @@
+site_name: pysafe-config
+repo_url: https://github.com/lancasterg/pysafe-config
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
