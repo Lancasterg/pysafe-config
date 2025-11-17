@@ -36,7 +36,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry install --with dev,test
+        poetry install --with test
 
     - name: Lint
       run: |
