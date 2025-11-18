@@ -33,4 +33,3 @@ def integration_test() -> None:
         logger.info("Integration test passed")
     else:
         pytest.fail("Integration test failed")
-

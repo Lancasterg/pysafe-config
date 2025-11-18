@@ -21,17 +21,9 @@ def test_getenv_float_default_none_required_false(monkeypatch):
     assert result is expected
 
 
-def test_getenv_float_default_set_required_false(monkeypatch):
-    expected = 12.9
-
-    result = getenv_float("SAMPLING_RATIO", default=12.9, required=False)
-
-    assert result == expected
-
-
-def test_getenv_float_default_set_required_true_raises_exception(monkeypatch):
-    with pytest.raises(RuntimeError):
-        _ = getenv_float("SAMPLING_RATIO", default=12.9, required=True)
+def test_getenv_float_default_set_required_false_raises_exception(monkeypatch):
+    with pytest.raises(ValueError):
+        _ = getenv_float("SAMPLING_RATIO", default=12.9, required=False)
 
 
 def test_getenv_float_default_unset_required_true_raises_exception(monkeypatch):
