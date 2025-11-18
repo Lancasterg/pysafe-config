@@ -174,6 +174,3 @@ The release process needs work, but for now:
 - Add a function that allows the user to pass the type they are expecting into a get_env function
   - `get_env("NUM_ROWS", int, ...)`
 - Test the error strings in error messages
-- put build passing / failing tag on repo
-- put code coverage tag on repo (It is 100%)
-- Create a web page for proper docs

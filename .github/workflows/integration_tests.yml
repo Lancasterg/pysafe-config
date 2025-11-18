@@ -1,0 +1,40 @@
+name: Integration test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Coverage Python
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Create python environment
+        run: |
+          python -m pip install poetry==1.5.1
+          python -m poetry config virtualenvs.in-project true
+          poetry install --with test
+
+      - name: Cache python environment
+        uses: actions/cache@v3
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Run integration tests
+        env:
+          NUM_PRINTS: 5
+          MESSAGE: super_secret_message
+        run: |
+          poetry run python example_usage/example_success.py
+

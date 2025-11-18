@@ -66,6 +66,11 @@ def _getenv(
     """
     value: str | None = os.getenv(var_name)
 
+    if value is None and required is True and default is not None:
+        raise ValueError(
+            f"Default argument is set to {default}, but required is {required}, even by default"
+        )
+
     if value is None and required is True:
         raise RuntimeError(f"Missing required environment variable '{var_name}'.")
 
