@@ -1,10 +1,22 @@
 def _str_to_str(value: str) -> str:
     """
-    TODO: extend this so that we can have a list of allowed values, like an enum
+    Kind of a pointless function for now as environment variables are read as strings.
+    There may be some minute edge case whereby we get to this point and `value` is not a string and therefore this
+    function will handle it.
+
+    We could also add validation (against an enum or something) at a later time.
+
     Args:
-        value:
+        value (str): The string value to convert.
 
     Returns:
+        str: The string representation of the string ;)
+
+    Raises:
+        ValueError: If the string cannot be converted to a string
 
     """
-    return str(value)
+    try:
+        return str(value)
+    except ValueError:
+        raise ValueError(f"{value} cannot be converted into a string")
