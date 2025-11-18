@@ -8,8 +8,6 @@
 It provides a set of four fully type-hinted functions to read environment variables, one for each of the following commonly used type of rnvironment variqgle `{str, int, float, bool}`.
  [The docs can be found here](https://lancasterg.github.io/pysafe-config/).
 
-> ⚠️ **Warning: Version 1.0.0 has not yet been released. 0.0.0 is available, but it is not production quality code.**
-
 ## Why it exists
 
 ### The Problem: Boilerplate and Error-Prone Environment Variable Handling
