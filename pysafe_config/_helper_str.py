@@ -18,5 +18,5 @@ def _str_to_str(value: str) -> str:
     """
     try:
         return str(value)
-    except ValueError:
-        raise ValueError(f"{value} cannot be converted into a string")
+    except ValueError as e:
+        raise ValueError(f"{value} cannot be converted into a string") from e
