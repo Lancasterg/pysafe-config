@@ -2,15 +2,13 @@
 [![Build Passing](https://github.com/lancasterg/pysafe-config/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/lancasterg/pysafe-config/actions/workflows/run-tests.yml)
 ![PyPI](https://img.shields.io/pypi/v/pysafe-config.svg)
 
-# pysafe-config
-
+# pysafe-config 
 `pysafe-config` is a lightweight Python library designed to simplify the process of reading environment variables.
 
-It provides a set of four fully type-hinted public functions to read environment variables, one for each of the following types `{str, int, float, bool}`.
+It provides a set of four fully type-hinted functions to read environment variables, one for each of the following commonly used type of rnvironment variqgle `{str, int, float, bool}`.
+ [The docs can be found here](https://lancasterg.github.io/pysafe-config/).
 
-### Links
-- [pypi](https://pypi.org/project/pysafe-config/)
-- [docs](https://lancasterg.github.io/pysafe-config/)
+> ⚠️ **Warning: Version 1.0.0 has not yet been released. 0.0.0 is available, but it is not production quality code.**
 
 ## Why it exists
 
@@ -166,7 +164,7 @@ The release process needs work, but for now:
 2. Get the names of the closed PRs since the last release 
 3. Create a new release, paste in the names of the previous MRs into the changelog
 4. Create the new tag, being sure to use the next version up since the previous release
-5. Go to Actions and approve the github workflow
+5. Go to Actions and approve the Github workflow
 6. Once finished, try installing the latest version in a shell using `pip install pysafe-config`
 
 ## Future work
