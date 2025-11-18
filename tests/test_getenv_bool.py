@@ -50,7 +50,7 @@ def test_getenv_bool_default_none_required_false(monkeypatch):
         ("disable", False),
         ("disabled", False),
         ("f", False),
-]
+    ],
 )
 def test_getenv_bool_passes_validation(value, expected, monkeypatch):
     monkeypatch.setenv("ENABLE_WORMS", value)
