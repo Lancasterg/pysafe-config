@@ -2,15 +2,13 @@
 [![Build Passing](https://github.com/lancasterg/pysafe-config/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/lancasterg/pysafe-config/actions/workflows/run-tests.yml)
 ![PyPI](https://img.shields.io/pypi/v/pysafe-config.svg)
 
-# pysafe-config
-
+# pysafe-config 
 `pysafe-config` is a lightweight Python library designed to simplify the process of reading environment variables.
 
-It provides a set of four fully type-hinted public functions to read environment variables, one for each of the following types `{str, int, float, bool}`.
+It provides a set of four fully type-hinted functions to read environment variables, one for each of the following commonly used type of rnvironment variqgle `{str, int, float, bool}`.
+ [The docs can be found here](https://lancasterg.github.io/pysafe-config/).
 
-### Links
-- [pypi](https://pypi.org/project/pysafe-config/)
-- [docs](https://lancasterg.github.io/pysafe-config/)
+> ⚠️ **Warning: Version 1.0.0 has not yet been released. 0.0.0 is available, but it is not production quality code.**
 
 ## Why it exists
 
