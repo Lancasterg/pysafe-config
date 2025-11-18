@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/lancasterg/pysafe-config/branch/main/graph/badge.svg)](https://codecov.io/gh/USERNAME/REPOSITORY)
+[![Build Passing](https://github.com/lancasterg/pysafe-config/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/lancasterg/pysafe-config/actions/workflows/run-tests.yml)
 
 # pysafe-config
 
