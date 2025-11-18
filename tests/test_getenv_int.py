@@ -29,6 +29,11 @@ def test_getenv_int_default_set_required_false(monkeypatch):
     assert result == expected
 
 
+def test_getenv_int_default_set_required_false(monkeypatch):
+    with pytest.raises(ValueError):
+        _ = getenv_int("NUM_BATCHES", default=15, required=False)
+
+
 def test_getenv_int_default_set_required_true_raises_exception(monkeypatch):
     with pytest.raises(RuntimeError):
         _ = getenv_int("NUM_BATCHES", default=15, required=True)

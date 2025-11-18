@@ -164,7 +164,7 @@ The release process needs work, but for now:
 2. Get the names of the closed PRs since the last release 
 3. Create a new release, paste in the names of the previous MRs into the changelog
 4. Create the new tag, being sure to use the next version up since the previous release
-5. Go to Actions and approve the github workflow
+5. Go to Actions and approve the Github workflow
 6. Once finished, try installing the latest version in a shell using `pip install pysafe-config`
 
 ## Future work
@@ -172,6 +172,3 @@ The release process needs work, but for now:
 - Add a function that allows the user to pass the type they are expecting into a get_env function
   - `get_env("NUM_ROWS", int, ...)`
 - Test the error strings in error messages
-- put build passing / failing tag on repo
-- put code coverage tag on repo (It is 100%)
-- Create a web page for proper docs
