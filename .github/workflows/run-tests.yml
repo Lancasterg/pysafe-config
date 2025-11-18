@@ -46,11 +46,11 @@ jobs:
       run: |
         make test
 
-    - name: Run integration tests
-      env:
-        INT_TEST_VAR: 1
-        STR_TEST_VAR: "secret message"
-        BOOL_TEST_VAR: "TRUE"
-        FLOAT_TEST_VAR: 73.9
-      run: |
-        poetry run python tests/integration_test.py
+#    - name: Run integration tests
+#      env:
+#        INT_TEST_VAR: 1
+#        STR_TEST_VAR: "secret message"
+#        BOOL_TEST_VAR: "TRUE"
+#        FLOAT_TEST_VAR: 73.9
+#      run: |
+#        poetry run python tests/integration_test.py

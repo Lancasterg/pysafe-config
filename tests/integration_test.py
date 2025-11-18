@@ -1,6 +1,8 @@
-from pysafe_config import getenv_int, getenv_str, getenv_bool, getenv_float
 import logging
+
 import pytest
+
+from pysafe_config import getenv_bool, getenv_float, getenv_int, getenv_str
 
 logger = logging.getLogger(__name__)
 
