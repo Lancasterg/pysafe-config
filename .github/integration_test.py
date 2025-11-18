@@ -34,6 +34,3 @@ def integration_test() -> None:
     else:
         pytest.fail("Integration test failed")
 
-
-if __name__ == "__main__":
-    integration_test()
