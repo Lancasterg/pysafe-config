@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config._helper_bool import _str_to_bool
+from pysafe_config._internal._helpers import _str_to_bool
 
 
 @pytest.mark.parametrize(
