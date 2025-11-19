@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config import _getenv
+from pysafe_config._internal._getenv import _getenv
 
 
 @pytest.fixture

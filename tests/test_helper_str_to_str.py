@@ -1,6 +1,6 @@
 import pytest
 
-from pysafe_config._helper_str import _str_to_str
+from pysafe_config._internal._helpers import _str_to_str
 
 
 def test_str_to_str_valid():
