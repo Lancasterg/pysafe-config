@@ -5,16 +5,17 @@
 # pysafe-config 
 `pysafe-config` is a lightweight Python library designed to simplify the process of reading environment variables.
 
-It provides a set of four fully type-hinted functions to read environment variables, one for each of the following commonly used type of rnvironment variqgle `{str, int, float, bool}`.
+It provides a set of four fully type-hinted functions to read environment variables, one for each of the following commonly used type of environment variables `{str, int, float, bool}`.
  [The docs can be found here](https://lancasterg.github.io/pysafe-config/).
 
 ## Why it exists
 
 ### The Problem: Boilerplate and Error-Prone Environment Variable Handling
 
-Handling environment variables isn't something you should be worrying about when writing an application or service in Python. 
-However, it can involve writing repetitive and error-prone code, especially when dealing with large numbers of environment variables requiring casting to their expected types. 
-Other libraries exist to help manage your environment ([Dynaconf](https://www.dynaconf.com/), [py-dotenvsafe](https://pypi.org/project/py-dotenv-safe/)), but what if you just want a type-aware (and as type-safe as possible in Python!) version `os.getenv`?
+Handling environment variables isn't something you should worry about when writing an application or service in Python. 
+However, it can involve writing repetitive and error-prone code, especially when dealing with large numbers of environment variables of differing types.
+
+Other libraries exist to help manage your environment ([Dynaconf](https://www.dynaconf.com/), [py-dotenvsafe](https://pypi.org/project/py-dotenv-safe/)), but what if you just want a type-aware (and type-safe) version `os.getenv`?
 
 
 Consider the common scenario of retrieving an environment variable, `SAMPLING_RATIO` as a float:
@@ -167,6 +168,6 @@ The release process needs work, but for now:
 
 ## Future work
 - Add a function for parsing enums from environment variables
-- Add a function that allows the user to pass the type they are expecting into a get_env function
+- Add a generic function that allows the user to pass the type they are expecting into a get_env function
   - `get_env("NUM_ROWS", int, ...)`
 - Test the error strings in error messages
